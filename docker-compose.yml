@@ -1,0 +1,22 @@
+version: '3'
+services:
+  tor_bitcoind_lnd:
+    image: tor-lnd
+    volumes:
+      - ./tor_data:/var/lib/tor
+      - ./tor_config:/etc/tor
+      - ./bitcoin_data:/home/alice/.bitcoin
+      - ./logfiles:/root/logfiles
+      - ./lnd_data:/home/alice/.lnd
+      - ./node_data:/home/alice/.node
+    environment:
+      LOCAL_USER_ID: ${LOCAL_USER_ID:-9001}
+    ports:
+      - "10009:10009"
+      - "8080:8080"
+
+  #bitcoin:
+  #  hostname: bitcoin
+  #  image: ruimarinho/bitcoin-core
+  #  volumes:
+  #    - ./tor_data:/var/lib/tor

@@ -12,5 +12,6 @@ RUN apk -U --no-progress update && apk -U --no-progress upgrade && \
   usermod -g alice tor
 
 COPY entrypoint.sh /root/entrypoint.sh
+COPY torrc /tmp/torrc
 
 ENTRYPOINT [ "/root/entrypoint.sh" ]

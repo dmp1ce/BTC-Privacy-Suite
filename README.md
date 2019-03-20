@@ -1,0 +1,27 @@
+# LND node with Tor
+
+Docker Compose configuration which enables a LND node to run through Tor with a Bitcoin node also running through Tor.
+
+# Quick Start
+
+Edit the `.env` file to change the LND alias and/or color. You could also override the variables on the command line with `-e` option.
+
+```
+docker-compose build --build-arg LOCAL_USER_ID=$(id -u $USER)
+docker-compose up -d && docker-compose logs -f
+```
+
+**Beware! This will start downloading the entire bitcoin blockchain over Tor which is over 500 GB in size.**
+
+To directly interact with the lnd service using the command line use `docker-compose exec -u lnd lnd lncli --help`. To enter a command prompt use the command `docker-compose exec -u lnd lnd sh`.
+
+After the bitcoin blockchain has been synced, the lightning node can be unlocked and connected to on port 8080.
+
+You probably will need to delete the `tls.cert` (and `tls.key` ?) and restart the lnd service at least once because the certificate is bound to 127.0.0.1 only.
+
+```
+rm lnd_data/tls.cert
+docker-compose restart lnd
+```
+
+Then a client like Joule can be connected to the LND node using the `https://localhost:8080` URL.

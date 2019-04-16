@@ -7,7 +7,7 @@ Docker Compose configuration which enables a LND node to run through Tor with a 
 Edit the `.env` file to change the LND alias and/or color. You could also override the variables on the command line with `-e` option.
 
 ```
-docker-compose build --build-arg LOCAL_USER_ID=$(id -u $USER)
+docker-compose build --build-arg LOCAL_USER_ID=$(id -u $USER) --build-arg LOCAL_GROUP_ID=$(id -g $USER)
 docker-compose up -d && docker-compose logs -f
 ```
 

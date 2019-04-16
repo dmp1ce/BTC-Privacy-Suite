@@ -9,7 +9,9 @@ fi
 # Change local user id and group
 if [ -n "${LOCAL_USER_ID}" ]; then
     usermod -u "$LOCAL_USER_ID" alice
-    groupmod -g "$LOCAL_USER_ID" alice
+fi
+if [ -n "${LOCAL_GROUP_ID}" ]; then
+    groupmod -g "$LOCAL_GROUP_ID" alice
 fi
 
 # Set correct owners on volumes

@@ -27,3 +27,9 @@ docker-compose restart lnd
 ```
 
 Then a client like Joule can be connected to the LND node using the `https://localhost:8080` URL.
+
+# Why?
+
+The intention of this Docker Compose configuration is to make it easy to get a private LND node up and running. If you are familiar with Docker then it should be as easy as building the containers with `./build.sh` and starting them up with the `docker-compose up -d` command.
+
+Managing the node and connecting other applications such as Zap or Joule to the node is another story! Good luck, have fun!

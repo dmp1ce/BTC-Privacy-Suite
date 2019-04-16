@@ -1,4 +1,9 @@
-FROM connectical/tor
+FROM alpine:latest
+
+RUN apk -U --no-progress upgrade \
+ && apk -U --no-progress add tor
+
+EXPOSE 9001 9050
 
 USER root
 ARG LOCAL_USER_ID=9999

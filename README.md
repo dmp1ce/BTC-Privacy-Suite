@@ -11,6 +11,8 @@ docker-compose build --build-arg LOCAL_USER_ID=$(id -u $USER)
 docker-compose up -d && docker-compose logs -f
 ```
 
+Use the `build.bash` script if you cannot remember the `--build-arg` syntax.
+
 **Beware! This will start downloading the entire bitcoin blockchain over Tor which is over 500 GB in size.**
 
 To directly interact with the lnd service using the command line use `docker-compose exec -u lnd lnd lncli --help`. To enter a command prompt use the command `docker-compose exec -u lnd lnd sh`.

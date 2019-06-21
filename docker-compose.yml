@@ -13,6 +13,7 @@ services:
   tor:
     build:
       context: docker/tor
+    restart: unless-stopped
     volumes:
       - ./tor_data:/var/lib/tor
       - ./tor_config:/etc/tor
@@ -23,6 +24,7 @@ services:
   bitcoin:
     build:
       context: docker/bitcoin
+    restart: unless-stopped
     network_mode: service:tor
     volumes:
       - *tor-data-ro
@@ -34,6 +36,7 @@ services:
   lnd:
     build:
       context: docker/lnd
+    restart: unless-stopped
     network_mode: service:tor
     volumes:
       - *tor-data-ro

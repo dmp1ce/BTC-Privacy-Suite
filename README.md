@@ -4,14 +4,12 @@ Docker Compose configuration which enables a LND node to run through Tor with a 
 
 # Quick Start
 
-Edit the `.env` file to change the LND alias and/or color. You could also override the variables on the command line with `-e` option.
+Edit the `.env` file to change the LND alias and/or color.
 
 ```
-docker-compose build --build-arg LOCAL_USER_ID=$(id -u $USER) --build-arg LOCAL_GROUP_ID=$(id -g $USER)
-docker-compose up -d && docker-compose logs -f
+./build.bash
+./start.bash && docker-compose logs -f
 ```
-
-Use the `build.bash` script if you cannot remember the `--build-arg` syntax.
 
 **Beware! This will start downloading the entire bitcoin blockchain over Tor which is over 500 GB in size.**
 
@@ -28,8 +26,12 @@ docker-compose restart lnd
 
 Then a client like Joule can be connected to the LND node using the `https://localhost:8080` URL.
 
+# Exposing Bitcoin Ports
+
+By default, bitcoin ports are only availble to the LND container. To expose bitcoin ports copy the `overrides/bitcoin-expose-ports.yml.tpl` to `overrides/bitcoin-expose-ports.yml`. This will allow `./start.bash` script to find the an additional configuration file for Docker Compose to load.
+
 # Why?
 
-The intention of this Docker Compose configuration is to make it easy to get a private LND node up and running. If you are familiar with Docker then it should be as easy as building the containers with `./build.sh` and starting them up with the `docker-compose up -d` command.
+The intention of this Docker Compose configuration is to make it easy to get a private LND node up and running. It should be as easy as building the containers with `./build.bash` and starting them up with the `./start.bash` command.
 
 Managing the node and connecting other applications such as Zap or Joule to the node is another story! Good luck, have fun!

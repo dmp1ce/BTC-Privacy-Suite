@@ -30,6 +30,8 @@ Then a client like Joule can be connected to the LND node using the `https://loc
 
 By default, bitcoin ports are only availble to the LND container. To expose bitcoin ports copy the `overrides/bitcoin-expose-ports.yml.tpl` to `overrides/bitcoin-expose-ports.yml`. This will allow `./start.bash` script to find the an additional configuration file for Docker Compose to load.
 
+To allow access from any computer (other than the one running docker) the `bitcoin.conf` needs to be modified to allow additional IP addresses such as the `rpcallowip=0.0.0.0/0` wildcard which will allow any IP address to use RPC.
+
 # Why?
 
 The intention of this Docker Compose configuration is to make it easy to get a private LND node up and running. It should be as easy as building the containers with `./build.bash` and starting them up with the `./start.bash` command.

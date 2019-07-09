@@ -1,4 +1,4 @@
-FROM dmp1ce/lnd:0.6.1-beta-alpine
+FROM dmp1ce/lnd:0.7-beta-alpine
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999

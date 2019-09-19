@@ -26,6 +26,8 @@ services:
       context: docker/bitcoin
     restart: always
     network_mode: service:tor
+    depends_on:
+      - tor
     volumes:
       - *tor-data-ro
       - *tor-config-ro
@@ -38,6 +40,9 @@ services:
       context: docker/lnd
     restart: always
     network_mode: service:tor
+    depends_on:
+      - tor
+      - bitcoin
     volumes:
       - *tor-data-ro
       - *tor-config-ro

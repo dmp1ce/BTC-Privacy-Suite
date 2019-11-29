@@ -61,6 +61,11 @@ CookieAuthFile /var/lib/tor/control_auth_cookie
 ## HiddenServicePort x y:z says to redirect requests on port x to the
 ## address y:z.
 
+HiddenServiceDir /var/lib/tor/electrs/
+HiddenServiceVersion 3
+HiddenServicePort 50001 127.0.0.1:50001
+HiddenServicePort 60001 127.0.0.1:60001
+
 #HiddenServiceDir /var/lib/tor/hidden_service/
 #HiddenServicePort 80 127.0.0.1:80
 

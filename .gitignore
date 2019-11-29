@@ -3,3 +3,4 @@
 /tor_config
 /lnd_data
 /node_data
+/electrs_data

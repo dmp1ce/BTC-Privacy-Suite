@@ -8,6 +8,9 @@ x-rpc-settings: &rpc-settings
 x-lnd-settings: &lnd-settings
   LND_ALIAS:
   LND_COLOR:
+x-network-settings: &network-settings
+  TESTNET_NUM:
+  ELECTRS_NETWORK:
 
 services:
   tor:
@@ -20,6 +23,8 @@ services:
     ports:
       - "10009:10009"
       - "8080:8080"
+      - "50001:50001"
+      - "60001:60001"
 
   bitcoin:
     build:
@@ -34,6 +39,7 @@ services:
       - ./bitcoin_data:/home/bitcoin/.bitcoin
     environment:
       <<: *rpc-settings
+      <<: *network-settings
 
   lnd:
     build:
@@ -49,5 +55,24 @@ services:
       - ./lnd_data:/home/lnd/.lnd
     command: lnd
     environment:
-      <<: *rpc-settings
       <<: *lnd-settings
+      <<: *rpc-settings
+      <<: *network-settings
+
+  electrs:
+    build:
+      context: docker/electrs
+    restart: always
+    network_mode: service:tor
+    depends_on:
+      - tor
+      - bitcoin
+    volumes:
+      - *tor-data-ro
+      - *tor-config-ro
+      - ./bitcoin_data:/home/user/.bitcoin:ro
+      - ./electrs_data:/home/user/.electrs
+    command: /usr/local/cargo/bin/electrs -vvvv --timestamp --db-dir /home/user/.electrs/db
+    environment:
+      <<: *rpc-settings
+      <<: *network-settings

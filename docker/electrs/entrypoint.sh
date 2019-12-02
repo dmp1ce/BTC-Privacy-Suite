@@ -17,8 +17,5 @@ fi
 # Fix ownership
 chown -R user /home/user/.electrs
 
-pwd
-ls -alh /home/user
-
 # Start electrs
 exec sudo -u user "$@"

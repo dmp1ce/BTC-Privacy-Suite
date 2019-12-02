@@ -24,7 +24,9 @@ services:
       - "10009:10009"
       - "8080:8080"
       - "50001:50001"
+      - "50002:50002"
       - "60001:60001"
+      - "60002:60002"
 
   bitcoin:
     build:
@@ -76,3 +78,15 @@ services:
     environment:
       <<: *rpc-settings
       <<: *network-settings
+
+  # Use Nginx to enable TLS connections to electrs
+  nginx:
+    build:
+      context: docker/nginx
+    restart: always
+    network_mode: service:tor
+    depends_on:
+      - tor
+      - electrs
+    volumes:
+      - ./nginx_keys:/root/keys

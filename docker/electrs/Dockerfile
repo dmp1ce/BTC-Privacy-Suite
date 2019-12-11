@@ -1,4 +1,4 @@
-FROM dmp1ce/electrs:0.8.1
+FROM dmp1ce/electrs:0.8.2
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999

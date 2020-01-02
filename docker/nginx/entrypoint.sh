@@ -10,24 +10,17 @@ log() {
     echo "$(date +"%Y-%m-%dT%H:%M:%SZ"):" "$@"
 }
 
-# Delete certificates if within one year of expiring,
-# so they can be recreated.
-if [ -f $ELECTRS_CERT ] && ! openssl x509 -noout -checkend 31536000 1>/dev/null < $ELECTRS_CERT; then
-    log "Less than one year until certificate expires for Electrum TLS."
-    log "Removing old certificate."
-    rm $ELECTRS_CERT
-    rm $ELECTRS_KEY
+# Generate key
+if [ ! -f $ELECTRS_KEY ]; then
+    # https://wiki.archlinux.org/index.php/OpenSSL#Usage
+    log "Generating key for Electrum TLS"
+    openssl genpkey -algorithm RSA -pkeyopt rsa_keygen_bits:4096 -out $ELECTRS_KEY
 fi
 
-# Create certificate for 10 years,
-# so we don't really have to worry about expiring certificates very often
-if [ ! -f $ELECTRS_KEY ] || [ ! -f $ELECTRS_CERT ]; then
-    log "Creating new certificate for Electrum TLS."
-    log "Certificate expires in 3650 days."
-    openssl req -nodes -x509 -days 3650 -newkey rsa:4096 \
-            -keyout "$ELECTRS_KEY"\
-            -out "$ELECTRS_CERT"\
-            -subj '/CN=localhost'
+# If the cert doesn't exist or is going to expire in 10 years then regenerate it for 100 years
+if [ ! -f $ELECTRS_CERT ] || ! openssl x509 -noout -checkend 315360000 1>/dev/null < $ELECTRS_CERT; then
+    log "Creating new certificate (expires in 36600 days) for Electrum TLS."
+    openssl req -key $ELECTRS_KEY -x509 -new -days 36600 -subj '/CN=localhost' -out $ELECTRS_CERT
 fi
 
 nginx -g "daemon off;"

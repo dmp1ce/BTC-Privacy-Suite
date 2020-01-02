@@ -12,15 +12,16 @@ log() {
 
 # Delete certificates if within one year of expiring,
 # so they can be recreated.
-if [ -f /root/keys/electrs.crt ] && ! openssl x509 -noout -checkend 31536000 1>/dev/null < /root/keys/electrs.crt; then
+if [ -f $ELECTRS_CERT ] && ! openssl x509 -noout -checkend 31536000 1>/dev/null < $ELECTRS_CERT; then
     log "Less than one year until certificate expires for Electrum TLS."
     log "Removing old certificate."
-    rm /root/keys/electrs.*
+    rm $ELECTRS_CERT
+    rm $ELECTRS_KEY
 fi
 
 # Create certificate for 10 years,
 # so we don't really have to worry about expiring certificates very often
-if [ ! -f /root/keys/electrs.key ] || [ ! -f /root/keys/electrs.crt ]; then
+if [ ! -f $ELECTRS_KEY ] || [ ! -f $ELECTRS_CERT ]; then
     log "Creating new certificate for Electrum TLS."
     log "Certificate expires in 3650 days."
     openssl req -nodes -x509 -days 3650 -newkey rsa:4096 \

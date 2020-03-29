@@ -1,8 +1,8 @@
 FROM nginx:alpine
+LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 # Add openssl for creating self-signed certificate
-RUN apk -U --no-progress update && apk -U --no-progress upgrade && \
-  apk -U --no-progress add -u openssl
+RUN apk --no-cache --no-progress add openssl=~1
 
 COPY nginx.conf /etc/nginx/nginx.conf
 COPY entrypoint.sh /root/entrypoint.sh

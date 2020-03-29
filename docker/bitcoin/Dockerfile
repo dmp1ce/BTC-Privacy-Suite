@@ -1,12 +1,12 @@
-FROM ruimarinho/bitcoin-core:0.18-alpine
+FROM ruimarinho/bitcoin-core:0.19-alpine
+LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999
 
 # Set the expected local user id
 # for shared group to access tor cookie
-RUN apk -U --no-progress update && apk -U --no-progress upgrade && \
-  apk -U --no-progress add -u shadow gettext && \
+RUN apk --no-cache --no-progress add shadow=~4 gettext=~0.19 && \
   groupadd -g "$LOCAL_GROUP_ID" bitcoin && \
   usermod -u "$LOCAL_USER_ID" -g bitcoin bitcoin
 

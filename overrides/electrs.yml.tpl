@@ -5,43 +5,21 @@ x-tor-config-ro: &tor-config-ro "./tor_config:/etc/tor:ro"
 x-rpc-settings: &rpc-settings
   RPCPASSWORD:
   RPCUSER:
-x-lnd-settings: &lnd-settings
-  LND_ALIAS:
-  LND_COLOR:
 x-network-settings: &network-settings
   TESTNET_NUM:
   ELECTRS_NETWORK:
 
 services:
   tor:
-    build:
-      context: docker/tor
-    restart: always
-    volumes:
-      - ./tor_data:/var/lib/tor
-      - ./tor_config:/etc/tor
     ports:
-      - "10009:10009"
-      - "8080:8080"
+      - "50001:50001"
+      - "50002:50002"
+      - "60001:60001"
+      - "60002:60002"
 
-  bitcoin:
+  electrs:
     build:
-      context: docker/bitcoin
-    restart: always
-    network_mode: service:tor
-    depends_on:
-      - tor
-    volumes:
-      - *tor-data-ro
-      - *tor-config-ro
-      - ./bitcoin_data:/home/bitcoin/.bitcoin
-    environment:
-      <<: *rpc-settings
-      <<: *network-settings
-
-  lnd:
-    build:
-      context: docker/lnd
+      context: docker/electrs
     restart: always
     network_mode: service:tor
     depends_on:
@@ -50,9 +28,21 @@ services:
     volumes:
       - *tor-data-ro
       - *tor-config-ro
-      - ./lnd_data:/home/lnd/.lnd
-    command: lnd
+      - ./bitcoin_data:/home/user/.bitcoin:ro
+      - ./electrs_data:/home/user/.electrs
+    command: /usr/local/cargo/bin/electrs -vvvv --timestamp --db-dir /home/user/.electrs/db
     environment:
-      <<: *lnd-settings
       <<: *rpc-settings
       <<: *network-settings
+
+  # Use Nginx to enable TLS connections to electrs
+  nginx:
+    build:
+      context: docker/nginx
+    restart: always
+    network_mode: service:tor
+    depends_on:
+      - tor
+      - electrs
+    volumes:
+      - ./nginx_keys:/root/keys

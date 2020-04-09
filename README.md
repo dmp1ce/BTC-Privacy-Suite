@@ -66,8 +66,32 @@ For a one liner, you can use `electrum -1 -s electrums3lojbuj.onion:50002:s -p s
 
 For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `.onion.bash` script.
 
+# LND compatible clients
+
+Both Joule and Zeus are supported for this docker configuration. Both are intended to be connected directly to the IP address, not going through Tor or an onion. The reason for not using Tor is because it is unclear to if it is secure to allow the LND RPC to be exposed publicly. To connect globally from to the LND server will require a VPN which is not covered by this project currently.
+
+Before trying to connect a client, don't forget to create a wallet and unlock LND. For example:
+
+```
+# Create wallet
+./start exec -u lnd lnd lncli create
+
+# Unlock wallet
+./start exec -u lnd lnd lncli unlock
+```
+
+## Joule
+
+Joule needs to connect to the LND server with the IP address and on the `8080` port. For example https://localhost:8080. In the browser, an "unsafe" certificate may need to be allowed. The reason it is marked as "unsafe" by the browser is because it hasn't been signed by a certificate authority.
+
+The macaroons are located in `lnd_data/data/chain/bitcoin/mainnet` and can be upload to Joule as needed. The admin and readonly macaroons are needed for Joule.
+
+## Zeus
+
+Zeue needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `macaroon.bash` script can be used. For example, to get the admin macaroon try `./macaroon.bash mainnet admin`.
+
 # Why?
 
 The intention of this Docker Compose configuration is to make it easy to get a private Bitcoin services up and running. It should be as easy as building the containers with `./build.bash` and starting them up with the `./start.bash` command.
 
-Managing the node and connecting other applications such as Zap or Joule to the node is another story! Good luck, have fun!
+Please open and issue or pull request for suggestions on either the configuration or documentation. I would like this to be a resource for getting all required Bitcoin services up and running on a single, modern day server.

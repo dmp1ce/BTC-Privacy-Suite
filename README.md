@@ -12,10 +12,11 @@ A networked computer capable of running Docker and Docker Compose is all that sh
 - Docker Compose
 - Bash (for helper scripts)
 
-## Hardware
+## Hardware (Recommended)
 
 - Broadband internet
-- 1 TB of hard drive space (Recommended)
+- 1 TB of hard drive space
+- x86-64 compatible CPU (ARM hasn't been tested)
 
 # Quick Start
 

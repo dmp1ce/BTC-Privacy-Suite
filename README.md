@@ -2,6 +2,21 @@
 
 Docker Compose configuration which enables a LND node to run through Tor with a Bitcoin node also running through Tor.
 
+# Requirements
+
+A networked computer capable of running Docker and Docker Compose is all that should be needed. It is also recommended to have 1 TB of hard drive space to store the Bitcoin blockchain. The more CPU, RAM and network bandwidth the better as Bitcoin uses CPU to validate, RAM to store and bandwidth to broadcast and receive data.
+
+## Software
+
+- Docker
+- Docker Compose
+- Bash (for helper scripts)
+
+## Hardware
+
+- Broadband internet
+- 1 TB of hard drive space (Recommended)
+
 # Quick Start
 
 Edit the `.env` file to change the LND alias and/or color.

@@ -97,13 +97,22 @@ Before trying to connect a client, don't forget to create a wallet and unlock LN
 
 ## Joule
 
+[Joule](https://lightningjoule.com/) requires a valid certificate for your IP address or domain name. To generate a valid TLS certificate delete the `tls.cert` (and `tls.key` ?) and restart the lnd service at least once because the certificate is bound to 127.0.0.1 only.
+
+```
+rm lnd_data/tls.cert
+docker-compose restart lnd
+```
+
+Then a client like Joule can be connected to the LND node using the `https://localhost:8080` URL.
+
 Joule needs to connect to the LND server with the IP address and on the `8080` port. For example https://localhost:8080. In the browser, an "unsafe" certificate may need to be allowed. The reason it is marked as "unsafe" by the browser is because it hasn't been signed by a certificate authority.
 
 The macaroons are located in `lnd_data/data/chain/bitcoin/mainnet` and can be upload to Joule as needed. The admin and readonly macaroons are needed for Joule.
 
 ## Zeus
 
-Zeue needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `macaroon.bash` script can be used. For example, to get the admin macaroon try `./macaroon.bash mainnet admin`.
+[Zeus](https://zeusln.app/) needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `macaroon.bash` script can be used. For example, to get the admin macaroon try `./macaroon.bash mainnet admin`.
 
 # Why?
 

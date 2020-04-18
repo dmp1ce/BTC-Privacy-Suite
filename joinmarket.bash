@@ -18,6 +18,14 @@ Commands:
 Any other command is directly sent to the joinmarket service.
 For example: \`./joinmarket.bash bash\` opens a bash prompt."
 
+# Is Join Market enabled?
+if ! ./start.bash ps -q joinmarketd > /dev/null 2>&1; then
+    echo "Join Market service (joinmarketd) is not currently running."
+    echo "Was the Join Market override enabled?"
+    echo "See: https://github.com/dmp1ce/BTC-Privacy-Suite#join-market"
+    exit 1
+fi
+
 CMD=""
 WALLET="${WALLET:-wallet.jmdat}"
 case "$1" in
@@ -49,4 +57,4 @@ if [ -n "$CMD" ]; then
     END_COMMAND="$PYTHON_CMD$CMD"
 fi
 
-exec ./start.bash exec --workdir=/jm/clientserver/scripts joinmarket-yg1 gosu joinmarket "$END_COMMAND"
+exec ./start.bash exec --workdir=/jm/clientserver/scripts joinmarketd gosu joinmarket "$END_COMMAND"

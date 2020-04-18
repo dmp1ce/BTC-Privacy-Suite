@@ -1,2 +1,2 @@
-network = "${ELECTRS_NETWORK}"
+network = "${NETWORK}"
 cookie = "${RPCUSER}:${RPCPASSWORD}"

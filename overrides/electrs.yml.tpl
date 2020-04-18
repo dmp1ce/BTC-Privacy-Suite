@@ -7,7 +7,7 @@ x-rpc-settings: &rpc-settings
   RPCUSER:
 x-network-settings: &network-settings
   TESTNET_NUM:
-  ELECTRS_NETWORK:
+  NETWORK:
 
 services:
   tor:

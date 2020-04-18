@@ -1,5 +1,11 @@
 #!/bin/bash
 
+# Check for verbose
+if [ "$1" == "-v" ]; then
+    VERBOSE=true
+    shift 1
+fi
+
 # Start LND, Bitcoin and Tor with added overrides
 
 CMD=""
@@ -31,5 +37,7 @@ do
 done
 
 # Start docker-compose with override options
-echo docker-compose -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"
+if [ "$VERBOSE" ]; then
+   echo docker-compose -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"
+fi
 cd "$DIR" && exec docker-compose -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"

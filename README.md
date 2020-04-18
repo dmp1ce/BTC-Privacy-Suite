@@ -1,6 +1,18 @@
-# LND node with Tor
+# BTC Privacy Suite
 
-Docker Compose configuration which enables a LND node to run through Tor with a Bitcoin node also running through Tor.
+A Docker Compose configuration which enables a Bitcoin (bticoind) and LND node to run through Tor for good privacy when using Bitcoin on chain transactions or Lightning transactions. With bitcoind and LND as the core, other services are provide as Docker Compose "overrides" such as:
+
+- Electrum Rust Server
+- Join Market
+
+See the [overrides section](#enabling-overrides).
+
+The Bitcoin and LND node can also be used as a backend for Lightning clients such as:
+
+- Joule
+- Zeus
+
+See [supported clients section](#lnd-compitable-clients).
 
 # Requirements
 

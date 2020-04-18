@@ -110,7 +110,7 @@ The `WALLET` environment variable can be used to change the wallet to use for Jo
 
 First, create a yield generator wallet which will be used for the yield generator. The [wallet creation instructions](#join-market-daemon-and-wallet-usage) explain how create a new wallet. Just enter the wallet name, such as `yg.jmdat`, when prompted with the `./joinmarket.bash generate` creation process.
 
-Load the wallet with some funds as the yield generator won't do anything if there is not enough funds in the wallet. Over 0.8 BTC is needed for the yield generator to create offers (reference source?).
+Load the wallet with some funds as the yield generator won't do anything if there is not enough funds in the wallet. Over 0.08 BTC is needed for the yield generator to create offers (reference source?).
 
 Copy the `joinmarket-yg.yml.tpl` to a file named `joinmarket-yg.yml`. Then edit the `joinmarket-yg.yml` with the setting wanted for the yield generation. You will need to set your wallet file and wallet password for Docker Compose to start the yield generator service.
 

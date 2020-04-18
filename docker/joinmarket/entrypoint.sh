@@ -1,19 +1,16 @@
 #!/bin/bash
 set -e
 
-chown joinmarket: /jm/clientserver/working
+JM_HOME=/home/joinmarket
+
+# Create data directory
+mkdir -p "$JM_HOME"/.joinmarket
+chown joinmarket: "$JM_HOME"/.joinmarket
 
 # Create config file if it doesn't already exist
-if [ ! -f "/jm/clientserver/working/joinmarket.cfg" ]; then
-    envsubst < /tmp/joinmarket.cfg > /jm/clientserver/working/joinmarket.cfg
-    chown joinmarket: /jm/clientserver/working/joinmarket.cfg
-    ls -alh /jm/clientserver/working
-fi
-
-if [ ! -L "/jm/clientserver/working/joinmarketd.py" ]; then
-    gosu joinmarket ln -s /jm/clientserver/scripts/*.py /jm/clientserver/working
-    gosu joinmarket mkdir -p /jm/clientserver/working/wallets
-    ls -alh /jm/clientserver/working
+if [ ! -f "$JM_HOME/.joinmarket/joinmarket.cfg" ]; then
+    envsubst < /tmp/joinmarket.cfg > "$JM_HOME"/.joinmarket/joinmarket.cfg
+    chown joinmarket: "$JM_HOME"/.joinmarket/joinmarket.cfg
 fi
 
 # Change local user id and group
@@ -24,5 +21,6 @@ if [ -n "${LOCAL_GROUP_ID}" ]; then
     groupmod -g "$LOCAL_GROUP_ID" joinmarket
 fi
 
-# Start joinmarket
-exec gosu joinmarket bash -c "source jmvenv/bin/activate && cd working && $*"
+# Run command as joinmarket user
+cd /jm/clientserver/scripts
+exec gosu joinmarket bash -c "$*"

@@ -82,6 +82,33 @@ For a one liner, you can use `electrum -1 -s electrums3lojbuj.onion:50002:s -p s
 
 For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `.onion.bash` script.
 
+## Join Market
+
+Two Join Market override templates are provided. One for starting the Join Market daemon (`joinmarketd.yml.tpl`) were a Join Market wallet can be managed. Another override is provided for running a Join Market yield generator (`joinmarket-yg.yml.tpl`) or market maker.
+
+### Join Market daemon and wallet usage
+
+Copy the `joinmarketd.yml.tpl` to a file named `joinmarketd.yml` and start the service with `./start.bash`.
+
+Then a wallet should be created using the `./joinmarket.bash` script and the `./joinmarket.bash generate` command. Some help using the `joinmarket.bash` script be viewed with `./joinmarket.bash help`. Use `./joinmarket.bash display` to see addresses and load your wallet with coins using the addresses given. From here, `./joinmarket.bash sendpayment AMOUNT ADDRESS` can be used to send a CoinJoin with default sending settings.
+
+The `WALLET` environment variable can be used to change the wallet to use for JoinMarket. Use the syntax `WALLET=yg.jmdat ./joinmarket.bash display` to display the addresses for the `yg.jmdat` wallet.
+
+### Join Market yield generator
+
+First, create a yield generator wallet which will be used for the yield generator. The [wallet creation instructions](#join-market-daemon-and-wallet-usage) explain how create a new wallet. Just enter the wallet name, such as `yg.jmdat`, when prompted with the `./joinmarket.bash generate` creation process.
+
+Load the wallet with some funds as the yield generator won't do anything if there is not enough funds in the wallet. Over 0.8 BTC is needed for the yield generator to create offers (reference source?).
+
+Copy the `joinmarket-yg.yml.tpl` to a file named `joinmarket-yg.yml`. Then edit the `joinmarket-yg.yml` with the setting wanted for the yield generation. You will need to set your wallet file and wallet password for Docker Compose to start the yield generator service.
+
+Please read the Join Market docs for determining what the setting should be for the yield generator or read the notes in the script itself. Defaults seem to be OK, if in doubt.
+
+- [Yield Generation documentation](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md)
+- [yg-privacyenhanced.py source](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/scripts/yg-privacyenhanced.py)
+
+The yield generation process can be monitored with `./start.bash logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./joinmarket.bash history`.
+
 # LND compatible clients
 
 Both Joule and Zeus are supported for this docker configuration. Both are intended to be connected directly to the IP address, not going through Tor or an onion. The reason for not using Tor is because it is unclear to if it is secure to allow the LND RPC to be exposed publicly. To connect globally from to the LND server will require a VPN which is not covered by this project currently.

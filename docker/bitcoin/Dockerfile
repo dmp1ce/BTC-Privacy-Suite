@@ -6,7 +6,7 @@ ARG LOCAL_GROUP_ID=9999
 
 # Set the expected local user id
 # for shared group to access tor cookie
-RUN apk --no-cache --no-progress add shadow=~4 gettext=~0.19 && \
+RUN apk --no-cache --no-progress add shadow=~4 gettext=~0.20 && \
   groupadd -g "$LOCAL_GROUP_ID" bitcoin && \
   usermod -u "$LOCAL_USER_ID" -g bitcoin bitcoin
 

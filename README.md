@@ -12,7 +12,7 @@ The Bitcoin and LND node can also be used as a backend for Lightning clients suc
 - Joule
 - Zeus
 
-See [supported clients section](#lnd-compatable-clients).
+See [supported clients section](#lnd-compatible-clients).
 
 # Requirements
 

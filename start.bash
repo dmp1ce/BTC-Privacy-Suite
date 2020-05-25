@@ -23,7 +23,7 @@ case "$1" in
         echo "Default command is \`up -d\`"
         exit 0
         ;;
-    "restart" | "up" | "logs" | "ps" | "stop" | "exec" | "kill" | "rm" )
+    "restart" | "up" | "logs" | "ps" | "stop" | "exec" | "kill" | "rm" | "run" )
         read -r -a CMD <<< "$@"
         ;;
     *)

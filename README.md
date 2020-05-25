@@ -32,7 +32,7 @@ A networked computer capable of running Docker and Docker Compose is all that sh
 
 # Quick Start
 
-Edit the `.env` file to change the LND alias and/or color.
+Copy the `.env.tpl` file to `.env` and change the LND alias and/or color.
 
 ```
 ./build.bash

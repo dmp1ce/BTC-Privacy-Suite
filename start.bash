@@ -6,8 +6,14 @@ if [ "$1" == "-v" ]; then
     shift 1
 fi
 
-# Start LND, Bitcoin and Tor with added overrides
+# Create .env if it doesn't exist already
+if [ ! -f "$DIR/.env" ]; then
+    echo ".env does not exist"
+else
+    echo ".env does exist"
+fi
 
+# Start LND, Bitcoin and Tor with added overrides
 CMD=""
 case "$1" in
     "help" )

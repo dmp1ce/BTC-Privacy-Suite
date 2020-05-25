@@ -6,3 +6,4 @@
 /electrs_data
 /nginx_keys
 /joinmarket_data
+/.env

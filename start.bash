@@ -6,12 +6,10 @@ if [ "$1" == "-v" ]; then
     shift 1
 fi
 
-# Create .env if it doesn't exist already
-if [ ! -f "$DIR/.env" ]; then
-    echo ".env does not exist"
-else
-    echo ".env does exist"
-fi
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
+
+# shellcheck source=scripts/create_env.bash
+. "$DIR/scripts/create_env.bash"
 
 # Start LND, Bitcoin and Tor with added overrides
 CMD=""

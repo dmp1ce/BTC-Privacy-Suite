@@ -32,9 +32,17 @@ A networked computer capable of running Docker and Docker Compose is all that sh
 
 # Quick Start
 
-Copy the `.env.tpl` file to `.env` and change the LND alias and/or color.
+
+Run `./start` once to generate the `.env` file. Then edit the `.env` and change the LND alias and/or color.
 
 ```
+# Generate .env
+./start.bash
+
+# Then edit custimize .env
+# vim .env
+
+# Build containers and start services
 ./build.bash
 ./start.bash && docker-compose logs -f
 ```

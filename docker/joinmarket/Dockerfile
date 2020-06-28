@@ -19,6 +19,4 @@ COPY entrypoint.sh /usr/local/bin/
 COPY yg-wrapper.sh /usr/local/bin/
 COPY joinmarket.cfg /tmp/joinmarket.cfg
 
-STOPSIGNAL SIGINT
-
 ENTRYPOINT [ "entrypoint.sh" ]

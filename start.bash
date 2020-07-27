@@ -14,19 +14,20 @@ DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 # Start LND, Bitcoin and Tor with added overrides
 CMD=""
 case "$1" in
-    "help" )
+    "restart" | "up" | "logs" | "ps" | "stop" | "exec" | "kill" | "rm" | "run" | "config" )
+        read -r -a CMD <<< "$@"
+        ;;
+    "")
+        CMD=(up -d)
+        ;;
+    * )
         echo "Start services with overrides. Supported parameters are 'up' and 'restart'."
         echo "Example: \`./start restart bitcoin\`"
         echo ""
         echo "Default command is \`up -d\`"
         exit 0
         ;;
-    "restart" | "up" | "logs" | "ps" | "stop" | "exec" | "kill" | "rm" | "run" )
-        read -r -a CMD <<< "$@"
-        ;;
-    *)
-        CMD=(up -d)
-        ;;
+
 esac
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"

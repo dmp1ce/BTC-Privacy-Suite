@@ -18,4 +18,7 @@ COPY entrypoint.sh /usr/local/bin/
 COPY yg-wrapper.sh /usr/local/bin/
 COPY joinmarket.cfg /tmp/joinmarket.cfg
 
-ENTRYPOINT [ "entrypoint.sh" ]
+STOPSIGNAL SIGINT
+
+# Use dumb-init to forward signals to subshells in wrapper
+ENTRYPOINT ["/usr/bin/dumb-init", "-v", "--", "entrypoint.sh"]

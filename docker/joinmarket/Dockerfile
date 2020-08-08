@@ -7,9 +7,8 @@ ARG LOCAL_GROUP_ID=9999
 # for shared group to access tor cookie
 # hadolint ignore=DL3002
 USER root
-# hadolint ignore=DL3008
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends gettext-base python3-nacl \
+  && apt-get install -yq --no-install-recommends gettext-base=0* python3-nacl=1* dumb-init=1* \
   && usermod -u "$LOCAL_USER_ID" joinmarket \
   && usermod -u "$LOCAL_USER_ID" -g joinmarket joinmarket \
   && apt-get clean \

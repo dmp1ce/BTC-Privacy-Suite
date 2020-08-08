@@ -13,6 +13,13 @@ RUN apk --no-cache --no-progress add shadow=~4 sudo=~1 gettext=~0.20 && \
     usermod -u "$LOCAL_USER_ID" lnd && \
     groupmod -g "$LOCAL_GROUP_ID" lnd
 
+USER lnd
+RUN mkdir /home/lnd/scripts
+COPY get_macaroons.sh /home/lnd/scripts/get_macaroons.sh
+
+# hadolint ignore=DL3002
+USER root
+RUN chmod +x /home/lnd/scripts/get_macaroons.sh
 COPY entrypoint.sh /root/entrypoint.sh
 COPY lnd.conf /tmp/lnd.conf
 ENTRYPOINT [ "/root/entrypoint.sh" ]

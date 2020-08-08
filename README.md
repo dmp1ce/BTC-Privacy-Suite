@@ -106,7 +106,7 @@ For a one liner, you can use `electrum -1 -s electrums3lojbuj.onion:50002:s -p s
     "oneserver": true,
 ```
 
-For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `.onion.bash` script.
+For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `scripts/onions.bash` script.
 
 ## Join Market
 
@@ -166,7 +166,7 @@ The macaroons are located in `lnd_data/data/chain/bitcoin/mainnet` and can be up
 
 ## Zeus
 
-[Zeus](https://zeusln.app/) needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `macaroon.bash` script can be used. For example, to get the admin macaroon try `./macaroon.bash mainnet admin`.
+[Zeus](https://zeusln.app/) needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `scripts/macaroons.bash` script can be used. For example, to get the admin macaroon try `./macaroons.bash mainnet admin`.
 
 # Why?
 

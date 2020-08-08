@@ -8,6 +8,26 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+HELP="Start services with overrides. Supported parameters are 'up' and 'restart'.
+Example: \`./start restart bitcoin\`
+
+Commands:
+  restart, up, logs, ps, stop, exec, kill, rm, run, config      - Docker Compose commands
+                                                                  Example: ./start logs -f bitcoin
+
+  jm                                                            - Shortcut command to scripts/joinmarket.bash
+                                                                  Example: ./start.bash jm display
+
+  macaroons                                                     - Shortcut command to scripts/macaroons.bash
+
+  onions                                                        - Shortcut command to scripts/onions.bash
+
+  help                                                          - Displays this message.
+
+The default command (no parameters) is \`up -d\`
+"
+
+
 # shellcheck source=scripts/create_env.bash
 . "$DIR/scripts/create_env.bash"
 
@@ -17,14 +37,28 @@ case "$1" in
     "restart" | "up" | "logs" | "ps" | "stop" | "exec" | "kill" | "rm" | "run" | "config" )
         read -r -a CMD <<< "$@"
         ;;
+    "jm")
+        scripts/joinmarket.bash "${*:2}"
+        exit 0
+        ;;
+    "onions")
+        scripts/onions.bash "${*:2}"
+        exit 0
+        ;;
+    "macaroons")
+        scripts/macaroons.bash "${*:2}"
+        exit 0
+        ;;
     "")
         CMD=(up -d)
         ;;
+    "help")
+        echo "$HELP"
+        exit 0
+        ;;
     * )
-        echo "Start services with overrides. Supported parameters are 'up' and 'restart'."
-        echo "Example: \`./start restart bitcoin\`"
-        echo ""
-        echo "Default command is \`up -d\`"
+        echo "Command '${*:1}' not recognized."
+        echo "$HELP"
         exit 0
         ;;
 

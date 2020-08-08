@@ -16,7 +16,7 @@ Commands:
   help                                      - This help message
 
 Any other command is directly sent to the joinmarket service.
-For example: \`./joinmarket.bash bash\` opens a bash prompt."
+For example: \`./scripts/joinmarket.bash bash\` opens a bash prompt."
 
 # Is Join Market enabled?
 if ! ./start.bash ps -q joinmarketd > /dev/null 2>&1; then

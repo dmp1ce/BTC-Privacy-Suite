@@ -5,33 +5,28 @@ x-tor-config-ro: &tor-config-ro "./tor_config:/etc/tor:ro"
 x-rpc-settings: &rpc-settings
   RPCPASSWORD:
   RPCUSER:
+x-lnd-settings: &lnd-settings
+  LND_ALIAS:
+  LND_COLOR:
 x-network-settings: &network-settings
   TESTNET_NUM:
   ELECTRS_NETWORK:
 
 services:
-  tor:
+  lnd:
     build:
-      context: docker/tor
-    restart: always
-    volumes:
-      - ./tor_data:/var/lib/tor
-      - ./tor_config:/etc/tor
-    ports:
-      - "10009:10009"
-      - "8080:8080"
-
-  bitcoin:
-    build:
-      context: docker/bitcoin
+      context: docker/lnd
     restart: always
     network_mode: service:tor
     depends_on:
       - tor
+      - bitcoin
     volumes:
       - *tor-data-ro
       - *tor-config-ro
-      - ./bitcoin_data:/home/bitcoin/.bitcoin
+      - ./lnd_data:/home/lnd/.lnd
+    command: lnd
     environment:
+      <<: *lnd-settings
       <<: *rpc-settings
       <<: *network-settings

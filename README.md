@@ -49,6 +49,24 @@ Run `./start` once to generate the `.env` file. Then edit the `.env` and change 
 
 **Beware! This will start downloading the entire bitcoin blockchain over Tor which is over 500 GB in size.**
 
+Interact directly with the bitcoin server using the CLI. For example: `./start.bash exec -u bitcoin bitcoin bitcoin-cli getnetworkinfo`. The start.bash script is a wrapper for docker-compose. The `exec -u bitcoin bitcoin` section tells docker-compose to run the `bitcoin-cli getnetworkinfo` command as the `bitcoin` user for the `bitcoin` service. Similar commands can be used for interacting with all the other services.
+
+# Enabling overrides
+
+Only Tor and Bitcoin Daemon are started considered core services. Everything else needs to be enabled using a Docker Compose override. To enable a Docker Compose override, create a `.yml` file in the `overrides` directory and then remember to use the `build.bash` and `start.bash` scripts when building and running docker-compose commands.
+
+Some supported overrides are explained in further detail.
+
+## Exposing Bitcoin Ports
+
+By default, bitcoin ports are only availble to the LND container. To expose bitcoin ports copy the `overrides/bitcoin-expose-ports.yml.tpl` to `overrides/bitcoin-expose-ports.yml`. This will allow `./start.bash` script to find the an additional configuration file for Docker Compose to load.
+
+To allow access from any computer (other than the one running docker) the `bitcoin.conf` needs to be modified to allow additional IP addresses such as the `rpcallowip=0.0.0.0/0` wildcard which will allow any IP address to use RPC.
+
+## LND Server
+
+Enable LND by copying `overrides/lnd.yml.tpl` to `overrides/lnd.yml`. Then rebuild and restart with `./build && ./start`.
+
 To directly interact with the lnd service using the command line use `docker-compose exec -u lnd lnd lncli --help`. To enter a command prompt use the command `docker-compose exec -u lnd lnd sh`.
 
 After the bitcoin blockchain has been synced, the lightning node can be unlocked and connected to on port 8080.
@@ -61,18 +79,6 @@ docker-compose restart lnd
 ```
 
 Then a client like Joule can be connected to the LND node using the `https://localhost:8080` URL.
-
-# Enabling overrides
-
-Only Tor, Bitcoin Daemon and LND are started considered core services. Everything else needs to be enabled using a Docker Compose override. To enable a Docker Compose override, create a `.yml` file in the `overrides` directory and then remember to use the `build.bash` and `start.bash` scripts when building and running docker-compose commands.
-
-Some supported overrides are explained in further detail.
-
-## Exposing Bitcoin Ports
-
-By default, bitcoin ports are only availble to the LND container. To expose bitcoin ports copy the `overrides/bitcoin-expose-ports.yml.tpl` to `overrides/bitcoin-expose-ports.yml`. This will allow `./start.bash` script to find the an additional configuration file for Docker Compose to load.
-
-To allow access from any computer (other than the one running docker) the `bitcoin.conf` needs to be modified to allow additional IP addresses such as the `rpcallowip=0.0.0.0/0` wildcard which will allow any IP address to use RPC.
 
 ## Electrum Server
 
@@ -89,7 +95,7 @@ HiddenServicePort 60001 127.0.0.1:60001
 HiddenServicePort 60002 127.0.0.1:60002
 ```
 
-Restart the Tor service with with `./start.bash restart tor` for the Electrum Server hidden server to be created. Then `use ./start.bash` to start the Electrum Server which includes `electrs` and `nginx`. `nginx` is for allowing for a TLS endpoint.
+Restart the Tor service with with `./start.bash restart tor` for the Electrum Server hidden server to be created. Then use `./start.bash` to start the Electrum Server which includes `electrs` and `nginx`. `nginx` is for allowing for a TLS endpoint.
 
 To connect Electrum to the Electrum Server, please see the [Electrum documentation on connecting to a single server through a Tor proxy](https://electrum.readthedocs.io/en/latest/tor.html#option-1-single-server).
 

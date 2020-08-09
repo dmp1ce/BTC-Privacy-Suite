@@ -38,15 +38,15 @@ case "$1" in
         read -r -a CMD <<< "$@"
         ;;
     "jm")
-        scripts/joinmarket.bash "${*:2}"
+        scripts/joinmarket.bash "${@:2}"
         exit 0
         ;;
     "onions")
-        scripts/onions.bash "${*:2}"
+        scripts/onions.bash "${@:2}"
         exit 0
         ;;
     "macaroons")
-        scripts/macaroons.bash "${*:2}"
+        scripts/macaroons.bash "${@:2}"
         exit 0
         ;;
     "")
@@ -57,7 +57,7 @@ case "$1" in
         exit 0
         ;;
     * )
-        echo "Command '${*:1}' not recognized."
+        echo "Command '${*:@}' not recognized."
         echo "$HELP"
         exit 0
         ;;

@@ -50,14 +50,14 @@ case "$1" in
     "")
         CMD=(up -d)
         ;;
-    "help")
+    "help" | "--help" | "-h")
         echo "$HELP"
         exit 0
         ;;
     * )
-        echo "Command '${*:@}' not recognized."
+        echo "Command '${*:1}' not recognized."
         echo "$HELP"
-        exit 0
+        exit 1
         ;;
 
 esac

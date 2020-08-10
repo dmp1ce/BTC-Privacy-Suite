@@ -13,4 +13,4 @@ if [ -n "$2" ]; then
     macaroon_name="$2"
 fi
 
-./start.bash exec -u lnd lnd ./scripts/get_macaroons.sh "$network" "$macaroon_name"
+./start exec -u lnd lnd ./scripts/get_macaroons.sh "$network" "$macaroon_name"

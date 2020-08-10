@@ -39,15 +39,15 @@ case "$1" in
         ;;
     "jm")
         scripts/joinmarket.bash "${@:2}"
-        exit 0
+        exit "$?"
         ;;
     "onions")
         scripts/onions.bash "${@:2}"
-        exit 0
+        exit "$?"
         ;;
     "macaroons")
         scripts/macaroons.bash "${@:2}"
-        exit 0
+        exit "$?"
         ;;
     "")
         CMD=(up -d)

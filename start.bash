@@ -8,8 +8,8 @@ fi
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
-HELP="Start services with overrides. Supported parameters are 'up' and 'restart'.
-Example: \`./start restart bitcoin\`
+HELP="Start services or run a command with overrides enabled.
+Example: \`./start logs -f bitcoin\`
 
 Commands:
   restart, up, logs, ps, stop, exec, kill, rm, run, config      - Docker Compose commands
@@ -24,9 +24,7 @@ Commands:
 
   help                                                          - Displays this message.
 
-The default command (no parameters) is \`up -d\`
-"
-
+The default command (no parameters) is \`up -d\`"
 
 # shellcheck source=scripts/create_env.bash
 . "$DIR/scripts/create_env.bash"

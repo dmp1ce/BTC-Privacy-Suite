@@ -37,29 +37,58 @@ Run `./start` once to generate the `.env` file. Then edit the `.env` and change 
 
 ```
 # Generate .env
-./start.bash
+./start
 
 # Then edit custimize .env
 # vim .env
 
 # Build containers and start services
-./build.bash
-./start.bash && docker-compose logs -f
+./build
+./start && docker-compose logs -f
 ```
 
 **Beware! This will start downloading the entire bitcoin blockchain over Tor which is over 500 GB in size.**
 
-Interact directly with the bitcoin server using the CLI. For example: `./start.bash exec -u bitcoin bitcoin bitcoin-cli getnetworkinfo`. The start.bash script is a wrapper for docker-compose. The `exec -u bitcoin bitcoin` section tells docker-compose to run the `bitcoin-cli getnetworkinfo` command as the `bitcoin` user for the `bitcoin` service. Similar commands can be used for interacting with all the other services.
+Interact directly with the bitcoin server using the CLI. For example: `./start exec -u bitcoin bitcoin bitcoin-cli getnetworkinfo`. The `start` script is a wrapper for docker-compose. The `exec -u bitcoin bitcoin` section tells docker-compose to run the `bitcoin-cli getnetworkinfo` command as the `bitcoin` user for the `bitcoin` service. Similar commands can be used for interacting with all the other services.
+
+# Helper Scripts
+
+Two scripts, `build` and `start` should take care of most of the interaction with the underlying services.
+
+- `build`, run with `./build` takes no parameters and only builds the required containers.
+- `start`, run with `./start` can take several parameters and is useful for starting all of the services and running commands when the services are running. `start help` will give more information on how to use it.
+
+```
+$ ./start help
+Start services or run a command with overrides enabled.
+Example: `./start logs -f bitcoin`
+
+Commands:
+  restart, up, logs, ps, stop, exec, kill, rm, run, config      - Docker Compose commands
+                                                                  Example: ./start logs -f bitcoin
+
+  jm                                                            - Shortcut command to scripts/joinmarket.bash
+                                                                  Example: ./start jm display
+
+  macaroons                                                     - Shortcut command to scripts/macaroons.bash
+
+  onions                                                        - Shortcut command to scripts/onions.bash
+
+  help                                                          - Displays this message.
+
+The default command (no parameters) is `up -d`
+
+```
 
 # Enabling overrides
 
-Only Tor and Bitcoin Daemon are started considered core services. Everything else needs to be enabled using a Docker Compose override. To enable a Docker Compose override, create a `.yml` file in the `overrides` directory and then remember to use the `build.bash` and `start.bash` scripts when building and running docker-compose commands.
+Only Tor and Bitcoin Daemon are started considered core services. Everything else needs to be enabled using a Docker Compose override. To enable a Docker Compose override, create a `.yml` file in the `overrides` directory and then remember to use the `build` and `start` scripts when building and running docker-compose commands.
 
 Some supported overrides are explained in further detail.
 
 ## Exposing Bitcoin Ports
 
-By default, bitcoin ports are only availble to the LND container. To expose bitcoin ports copy the `overrides/bitcoin-expose-ports.yml.tpl` to `overrides/bitcoin-expose-ports.yml`. This will allow `./start.bash` script to find the an additional configuration file for Docker Compose to load.
+By default, bitcoin ports are only availble to the LND container. To expose bitcoin ports copy the `overrides/bitcoin-expose-ports.yml.tpl` to `overrides/bitcoin-expose-ports.yml`. This will allow `./start` script to find the an additional configuration file for Docker Compose to load.
 
 To allow access from any computer (other than the one running docker) the `bitcoin.conf` needs to be modified to allow additional IP addresses such as the `rpcallowip=0.0.0.0/0` wildcard which will allow any IP address to use RPC.
 
@@ -82,7 +111,7 @@ Then a client like Joule can be connected to the LND node using the `https://loc
 
 ## Electrum Server
 
-To enable the Electrum Server service copy the `overrides/electrs.yml.tpl` to `overrides/electrs.yml` and then run `./build.bash` to build the container.
+To enable the Electrum Server service copy the `overrides/electrs.yml.tpl` to `overrides/electrs.yml` and then run `./build` to build the container.
 
 Add (uncomment) the following lines in the `tor_config/torrc` file in order to enable the Tor service for Electrum Server. The `5000*` ports are for mainnet. The `6000*` ports are for testnet.
 
@@ -95,7 +124,7 @@ HiddenServicePort 60001 127.0.0.1:60001
 HiddenServicePort 60002 127.0.0.1:60002
 ```
 
-Restart the Tor service with with `./start.bash restart tor` for the Electrum Server hidden server to be created. Then use `./start.bash` to start the Electrum Server which includes `electrs` and `nginx`. `nginx` is for allowing for a TLS endpoint.
+Restart the Tor service with with `./start restart tor` for the Electrum Server hidden server to be created. Then use `./start` to start the Electrum Server which includes `electrs` and `nginx`. `nginx` is for allowing for a TLS endpoint.
 
 To connect Electrum to the Electrum Server, please see the [Electrum documentation on connecting to a single server through a Tor proxy](https://electrum.readthedocs.io/en/latest/tor.html#option-1-single-server).
 
@@ -106,7 +135,7 @@ For a one liner, you can use `electrum -1 -s electrums3lojbuj.onion:50002:s -p s
     "oneserver": true,
 ```
 
-For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `scripts/onions.bash` script.
+For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `./start` script.
 
 ## Join Market
 
@@ -114,26 +143,26 @@ Two Join Market override templates are provided. One for starting the Join Marke
 
 ### Join Market daemon and wallet usage
 
-Copy the `joinmarketd.yml.tpl` to a file named `joinmarketd.yml` and start the service with `./start.bash`.
+Copy the `joinmarketd.yml.tpl` to a file named `joinmarketd.yml` and start the service with `./start`.
 
-Then a wallet should be created using the `./joinmarket.bash` script and the `./joinmarket.bash generate` command. Some help using the `joinmarket.bash` script be viewed with `./joinmarket.bash help`. Use `./joinmarket.bash display` to see addresses and load your wallet with coins using the addresses given. From here, `./joinmarket.bash sendpayment AMOUNT ADDRESS` can be used to send a CoinJoin with default sending settings.
+Then a wallet should be created using the `./start jm` command and the `./start jm generate` command. Some help using the `./start jm` script be viewed with `./start jm help`. Use `./start jm display` to see addresses and load your wallet with coins using the addresses given. From here, `./start jm sendpayment AMOUNT ADDRESS` can be used to send a CoinJoin with default sending settings.
 
-The `WALLET` environment variable can be used to change the wallet to use for JoinMarket. Use the syntax `WALLET=yg.jmdat ./joinmarket.bash display` to display the addresses for the `yg.jmdat` wallet.
+The `WALLET` environment variable can be used to change the wallet to use for JoinMarket. Use the syntax `WALLET=yg.jmdat ./start jm display` to display the addresses for the `yg.jmdat` wallet.
 
 ### Join Market yield generator
 
-First, create a yield generator wallet which will be used for the yield generator. The [wallet creation instructions](#join-market-daemon-and-wallet-usage) explain how create a new wallet. Just enter the wallet name, such as `yg.jmdat`, when prompted with the `./joinmarket.bash generate` creation process.
+First, create a yield generator wallet which will be used for the yield generator. The [wallet creation instructions](#join-market-daemon-and-wallet-usage) explain how create a new wallet. Just enter the wallet name, such as `yg.jmdat`, when prompted with the `./start jm generate` creation process.
 
 Load the wallet with some funds as the yield generator won't do anything if there is not enough funds in the wallet. Over 0.08 BTC is needed for the yield generator to create offers (reference source?).
 
-Copy the `joinmarket-yg.yml.tpl` to a file named `joinmarket-yg.yml`. Then edit the `joinmarket-yg.yml` with the setting wanted for the yield generation. You will need to set your wallet file and wallet password for Docker Compose to start the yield generator service.
+Copy the `joinmarket-yg.yml.tpl` file to a file named `joinmarket-yg.yml`. Then edit the `joinmarket-yg.yml` with the setting wanted for the yield generation. You will need to set your wallet file and wallet password for Docker Compose to start the yield generator service.
 
 Please read the Join Market docs for determining what the setting should be for the yield generator or read the notes in the script itself. Defaults seem to be OK, if in doubt.
 
 - [Yield Generation documentation](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md)
 - [yg-privacyenhanced.py source](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/scripts/yg-privacyenhanced.py)
 
-The yield generation process can be monitored with `./start.bash logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./joinmarket.bash history`.
+The yield generation process can be monitored with `./start logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./start jm history`.
 
 # LND compatible clients
 
@@ -166,10 +195,10 @@ The macaroons are located in `lnd_data/data/chain/bitcoin/mainnet` and can be up
 
 ## Zeus
 
-[Zeus](https://zeusln.app/) needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `scripts/macaroons.bash` script can be used. For example, to get the admin macaroon try `./macaroons.bash mainnet admin`.
+[Zeus](https://zeusln.app/) needs to connect to the LND server with the IP address and on the `8080` port. For example, `localhost` for the host and `8080` for the REST port. The admin macaroons need to be copied as Hex format. To get the macaroons in Hex format the `./start macaroons` script can be used. For example, to get the admin macaroon try `./start macaroons mainnet admin`.
 
 # Why?
 
-The intention of this Docker Compose configuration is to make it easy to get a private Bitcoin services up and running. It should be as easy as building the containers with `./build.bash` and starting them up with the `./start.bash` command.
+The intention of this Docker Compose configuration is to make it easy to get a private Bitcoin services up and running. It should be as easy as building the containers with `./build` and starting them up with the `./start` command.
 
 Please open and issue or pull request for suggestions on either the configuration or documentation. I would like this to be a resource for getting all required Bitcoin services up and running on a single, modern day server.

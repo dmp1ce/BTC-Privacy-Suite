@@ -5,6 +5,9 @@ x-tor-config-ro: &tor-config-ro "./tor_config:/etc/tor:ro"
 x-rpc-settings: &rpc-settings
   RPCPASSWORD:
   RPCUSER:
+x-network-settings: &network-settings
+  NETWORK:
+  NETWORK_PORT:
 
 services:
   joinmarketd:
@@ -22,3 +25,4 @@ services:
     command: python3 joinmarketd.py
     environment:
       <<: *rpc-settings
+      <<: *network-settings

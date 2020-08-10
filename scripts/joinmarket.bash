@@ -57,4 +57,4 @@ if [ -n "$CMD" ]; then
     END_COMMAND="$PYTHON_CMD$CMD"
 fi
 
-exec ./start.bash exec --workdir=/jm/clientserver/scripts joinmarketd gosu joinmarket "$END_COMMAND"
+exec ./start exec --workdir=/jm/clientserver/scripts joinmarketd gosu joinmarket "$END_COMMAND"

@@ -162,7 +162,7 @@ Please read the Join Market docs for determining what the setting should be for 
 - [Yield Generation documentation](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md)
 - [yg-privacyenhanced.py source](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/scripts/yg-privacyenhanced.py)
 
-The yield generation process can be monitored with `./start logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./start jm history`.
+Build and start the yield generator with `./build` and then `./start`. The yield generation process can be monitored with `./start logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./start jm history`.
 
 # LND compatible clients
 

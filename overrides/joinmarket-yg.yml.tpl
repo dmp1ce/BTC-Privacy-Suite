@@ -36,8 +36,8 @@ services:
     volumes:
       - *tor-data-ro
       - *tor-config-ro
-      - ./joinmarket_data:/jm/.joinmarket
-    command: echo -n "password" | python3 yield-generator-basic.py wallet.jmdat --wallet-password-stdin
+      - ./joinmarket_data:/home/joinmarket/.joinmarket
+    command: yg-wrapper.sh
     environment:
       <<: *rpc-settings
       <<: *jm-settings

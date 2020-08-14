@@ -3,7 +3,7 @@
 # Print onion addresses
 
 # Check to see if electrs is running
-if ./start.bash ps electrs > /dev/null 2>&1; then
+if ./start ps electrs > /dev/null 2>&1; then
     electrs_onion="$(./start exec -u tor tor cat /var/lib/tor/electrs/hostname)"
     echo "Electrum Server: $electrs_onion"
 fi

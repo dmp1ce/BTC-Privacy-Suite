@@ -11,6 +11,7 @@ RUN apt-get update \
   && apt-get install -yq --no-install-recommends gettext-base=0* python3-nacl=1* dumb-init=1* \
   && usermod -u "$LOCAL_USER_ID" joinmarket \
   && usermod -u "$LOCAL_USER_ID" -g joinmarket joinmarket \
+  && ln -s /home/joinmarket/.joinmarket/commitmentlist /jm/clientserver/scripts/commitmentlist \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*
 

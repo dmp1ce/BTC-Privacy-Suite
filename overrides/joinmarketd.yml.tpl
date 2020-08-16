@@ -23,6 +23,7 @@ services:
       - *tor-config-ro
       - ./joinmarket_data:/home/joinmarket/.joinmarket
     command: python3 joinmarketd.py
+    tty: true
     environment:
       <<: *rpc-settings
       <<: *network-settings

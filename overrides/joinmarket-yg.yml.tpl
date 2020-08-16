@@ -38,6 +38,7 @@ services:
       - *tor-config-ro
       - ./joinmarket_data:/home/joinmarket/.joinmarket
     command: yg-wrapper.sh
+    tty: true
     environment:
       <<: *rpc-settings
       <<: *jm-settings

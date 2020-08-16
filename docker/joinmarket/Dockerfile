@@ -8,7 +8,7 @@ ARG LOCAL_GROUP_ID=9999
 # hadolint ignore=DL3002
 USER root
 RUN apt-get update \
-  && apt-get install -yq --no-install-recommends gettext-base=0* python3-nacl=1* dumb-init=1* \
+  && apt-get install -yq --no-install-recommends gettext-base=0* python3-nacl=1* tini=0* \
   && usermod -u "$LOCAL_USER_ID" joinmarket \
   && usermod -u "$LOCAL_USER_ID" -g joinmarket joinmarket \
   && ln -s /home/joinmarket/.joinmarket/commitmentlist /jm/clientserver/scripts/commitmentlist \
@@ -21,5 +21,5 @@ COPY joinmarket.cfg /tmp/joinmarket.cfg
 
 STOPSIGNAL SIGINT
 
-# Use dumb-init to forward signals to subshells in wrapper
-ENTRYPOINT ["/usr/bin/dumb-init", "-v", "--", "entrypoint.sh"]
+# Use tini to forward signals to subshells in wrapper
+ENTRYPOINT ["/usr/bin/tini", "-v", "-g", "--", "entrypoint.sh"]

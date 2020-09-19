@@ -26,3 +26,4 @@ services:
     tty: true
     environment:
       <<: *rpc-settings
+      <<: *network-settings

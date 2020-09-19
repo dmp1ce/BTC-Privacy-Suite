@@ -6,4 +6,5 @@
 /electrs_data
 /nginx_keys
 /joinmarket_data
+/joinmarket_bech32_data
 /.env

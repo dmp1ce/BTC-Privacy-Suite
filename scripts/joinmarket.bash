@@ -18,8 +18,10 @@ Commands:
 Any other command is directly sent to the joinmarket service.
 For example: \`./scripts/joinmarket.bash bash\` opens a bash prompt."
 
+DAEMON_SERVICE=${DAEMON_SERVICE:-joinmarketd}
+
 # Is Join Market enabled?
-if ! ./start ps -q joinmarketd > /dev/null 2>&1; then
+if ! ./start ps -q "$DAEMON_SERVICE" > /dev/null 2>&1; then
     echo "Join Market service (joinmarketd) is not currently running."
     echo "Was the Join Market override enabled?"
     echo "See: https://github.com/dmp1ce/BTC-Privacy-Suite#join-market"
@@ -57,4 +59,4 @@ if [ -n "$CMD" ]; then
     END_COMMAND="$PYTHON_CMD$CMD"
 fi
 
-exec ./start exec --workdir=/jm/clientserver/scripts joinmarketd gosu joinmarket "$END_COMMAND"
+exec ./start exec --workdir=/jm/clientserver/scripts "$DAEMON_SERVICE" gosu joinmarket "$END_COMMAND"

@@ -16,7 +16,12 @@ Commands:
                                                                   Example: ./start logs -f bitcoin
 
   jm                                                            - Shortcut command to scripts/joinmarket.bash
+                                                                  For nested segwit wallets
                                                                   Example: ./start.bash jm display
+
+  jm-bech32                                                     - Shortcut command to scripts/joinmarket-bech32.bash
+                                                                  For native segwit wallets
+                                                                  Example: ./start.bash jm-bech32 display
 
   macaroons                                                     - Shortcut command to scripts/macaroons.bash
 
@@ -37,6 +42,10 @@ case "$1" in
         ;;
     "jm")
         scripts/joinmarket.bash "${@:2}"
+        exit "$?"
+        ;;
+    "jm-bech32")
+        DAEMON_SERVICE=joinmarketd-bech32 scripts/joinmarket.bash "${@:2}"
         exit "$?"
         ;;
     "onions")

@@ -164,6 +164,21 @@ Please read the Join Market docs for determining what the setting should be for 
 
 Build and start the yield generator with `./build` and then `./start`. The yield generation process can be monitored with `./start logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./start jm history`.
 
+### Native Segwit (bech32 addresses)
+
+Native segwit addresses can be used with JoinMarket. All the relevant overrides are post-fixed with a `-bech32`. The data directory should be separated from the nested segwit data in order for the `native = true` setting to be set. This way, both nested and native yield generators can run at the same time. Use the `./start jm-bech32` command to interact with native segwit wallets.
+
+For example, steps to get native yield generator working would be.
+
+1. Copy `overrides/joinmarketd-bech32.yml.tpl` to `overrides/joinmarketd-bech32.yml`
+2. `./build && ./start`
+3. `./start jm-bech32 generate`
+4. `./start jm-bech32 display`
+5. Send some money to mixdepth 0
+6. Copy `overrides/joinmarket-bech32-yg.yml.tpl` to `overrides/joinmarket-bech32-yg.yml`.
+7. Change the wallet name and service name in `overrides/joinmarket-bech32-yg.yml` as needed.
+8. `./build && ./start`
+
 # LND compatible clients
 
 Both Joule and Zeus are supported for this docker configuration. Both are intended to be connected directly to the IP address, not going through Tor or an onion. The reason for not using Tor is because it is unclear to if it is secure to allow the LND RPC to be exposed publicly. To connect globally from to the LND server will require a VPN which is not covered by this project currently.

@@ -3,7 +3,7 @@
 A Docker Compose configuration which enables a Bitcoin (bticoind) and LND node to run through Tor for good privacy when using Bitcoin on chain transactions or Lightning transactions. With bitcoind and LND as the core, other services are provide as Docker Compose "overrides" such as:
 
 - Electrum Rust Server
-- Join Market
+- JoinMarket
 
 See the [overrides section](#enabling-overrides).
 
@@ -137,11 +137,11 @@ For a one liner, you can use `electrum -1 -s electrums3lojbuj.onion:50002:s -p s
 
 For reference, the `:s` in `electrums3lojbuj.onion:50002:s` specifies a secure (TLS) connection. A `:t` would specify an unsecure (TCP) connect. Both are supported. `50001` uses unsecure connections and `50002` uses secure connections. Both are ultimately secure if using and onion address, because Tor is encrypted from client to hidden service. The secure (TLS) endpoing is important if connecting an Electrum Android client and maybe some other clients. To get the `.onion` to connect to, run the `./start` script.
 
-## Join Market
+## JoinMarket
 
-Two Join Market override templates are provided. One for starting the Join Market daemon (`joinmarketd.yml.tpl`) were a Join Market wallet can be managed. Another override is provided for running a Join Market yield generator (`joinmarket-yg.yml.tpl`) or market maker.
+Two JoinMarket override templates are provided. One for starting the JoinMarket daemon (`joinmarketd.yml.tpl`) were a JoinMarket wallet can be managed. Another override is provided for running a JoinMarket yield generator (`joinmarket-yg.yml.tpl`) or market maker.
 
-### Join Market daemon and wallet usage
+### JoinMarket daemon and wallet usage
 
 Copy the `joinmarketd.yml.tpl` to a file named `joinmarketd.yml` and start the service with `./start`.
 
@@ -149,7 +149,7 @@ Then a wallet should be created using the `./start jm` command and the `./start 
 
 The `WALLET` environment variable can be used to change the wallet to use for JoinMarket. Use the syntax `WALLET=yg.jmdat ./start jm display` to display the addresses for the `yg.jmdat` wallet.
 
-### Join Market yield generator
+### JoinMarket yield generator
 
 First, create a yield generator wallet which will be used for the yield generator. The [wallet creation instructions](#join-market-daemon-and-wallet-usage) explain how create a new wallet. Just enter the wallet name, such as `yg.jmdat`, when prompted with the `./start jm generate` creation process.
 
@@ -157,7 +157,7 @@ Load the wallet with some funds as the yield generator won't do anything if ther
 
 Copy the `joinmarket-yg.yml.tpl` file to a file named `joinmarket-yg.yml`. Then edit the `joinmarket-yg.yml` with the setting wanted for the yield generation. You will need to set your wallet file and wallet password for Docker Compose to start the yield generator service.
 
-Please read the Join Market docs for determining what the setting should be for the yield generator or read the notes in the script itself. Defaults seem to be OK, if in doubt.
+Please read the JoinMarket docs for determining what the setting should be for the yield generator or read the notes in the script itself. Defaults seem to be OK, if in doubt.
 
 - [Yield Generation documentation](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/YIELDGENERATOR.md)
 - [yg-privacyenhanced.py source](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/scripts/yg-privacyenhanced.py)

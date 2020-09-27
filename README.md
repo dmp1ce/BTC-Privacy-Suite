@@ -164,6 +164,23 @@ Please read the JoinMarket docs for determining what the setting should be for t
 
 Build and start the yield generator with `./build` and then `./start`. The yield generation process can be monitored with `./start logs -f joinmarket-yg`. The history of transactions can be viewed with `WALLET=yg.jmdat ./start jm history`.
 
+### Tumbler
+
+To run a tumbler on an existing wallet, use the command `WALLET=myWallet.jmdat ./start jm tumbler` where `myWallet.jmdat` is the name of your wallet to mix funds. See `./start jm tumbler --help` for command line options and please look at [tumbler.py documentation on Github](https://github.com/JoinMarket-Org/joinmarket-clientserver/blob/master/docs/tumblerguide.md) for help getting started with mixing using the tumbler script.
+
+Logs and schedule for the tumbler will be in the directory `joinmarket_data/tumbler_logs`.
+
+### User input issues
+
+When using JoinMarket scripts, it can happen that an input is needed but there is no visible prompt for the user.
+
+When using `sendpayment` command, and after the fee is calculated, there should be a prompt for `y` or `n` to continue. Enter one of them and press the enter button to continue.
+
+When using `tumber` command, if destination addresses were not given, then the script will ask for addresses. It should be obvious when the script is asking for the bitcoin address, because many `*****` characters will be visible and a message about missing an address. Enter the destination bitcoin address and press enter to continue with the script.
+
+See issue https://github.com/dmp1ce/BTC-Privacy-Suite/issues/1 for more details.
+
+
 ### Native Segwit (bech32 addresses)
 
 Native segwit addresses can be used with JoinMarket. All the relevant overrides are post-fixed with a `-bech32`. The data directory should be separated from the nested segwit data in order for the `native = true` setting to be set. This way, both nested and native yield generators can run at the same time. Use the `./start jm-bech32` command to interact with native segwit wallets.

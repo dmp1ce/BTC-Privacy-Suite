@@ -45,6 +45,9 @@ case "$1" in
     "sendpayment")
         CMD="sendpayment.py $WALLET ${*:2}"
         ;;
+    "tumbler")
+        CMD="tumbler.py $WALLET ${*:2}"
+        ;;
     "" | "help")
         echo "$HELP"
         exit

@@ -18,8 +18,5 @@ fi
 # Fix ownership
 chown -R lnd /home/lnd
 
-#pwd
-#ls -alh /home/lnd/.lnd
-
 # Start lnd
 exec sudo -u lnd "$@"

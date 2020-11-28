@@ -17,11 +17,11 @@ Commands:
 
   jm                                                            - Shortcut command to scripts/joinmarket.bash
                                                                   For nested segwit wallets
-                                                                  Example: ./start.bash jm display
+                                                                  Example: ./start jm display
 
   jm-bech32                                                     - Shortcut command to scripts/joinmarket-bech32.bash
                                                                   For native segwit wallets
-                                                                  Example: ./start.bash jm-bech32 display
+                                                                  Example: ./start jm-bech32 display
 
   lnd                                                           - Shortcut command to scripts/lnd.bash
                                                                   Example: ./start lnd unlock

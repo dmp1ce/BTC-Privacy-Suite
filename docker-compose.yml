@@ -17,9 +17,6 @@ services:
     volumes:
       - ./tor_data:/var/lib/tor
       - ./tor_config:/etc/tor
-    ports:
-      - "10009:10009"
-      - "8080:8080"
 
   bitcoin:
     build:

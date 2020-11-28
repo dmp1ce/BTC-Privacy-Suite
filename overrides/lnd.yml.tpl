@@ -8,6 +8,9 @@ x-rpc-settings: &rpc-settings
 x-lnd-settings: &lnd-settings
   LND_ALIAS:
   LND_COLOR:
+  LND_LISTEN_PORT:
+  LND_RPC_PORT:
+  LND_REST_PORT:
 x-network-settings: &network-settings
   TESTNET_NUM:
   ELECTRS_NETWORK:
@@ -30,3 +33,10 @@ services:
       <<: *lnd-settings
       <<: *rpc-settings
       <<: *network-settings
+
+  tor:
+    ports:
+      # LND Rest
+      - "8080:8080"
+      # LND RPC
+      - "10009:10009"

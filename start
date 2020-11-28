@@ -23,7 +23,11 @@ Commands:
                                                                   For native segwit wallets
                                                                   Example: ./start.bash jm-bech32 display
 
+  lnd                                                           - Shortcut command to scripts/lnd.bash
+                                                                  Example: ./start lnd unlock
+
   macaroons                                                     - Shortcut command to scripts/macaroons.bash
+                                                                  DEPRECATED: Use \`./start lnd macaroons\`
 
   onions                                                        - Shortcut command to scripts/onions.bash
 
@@ -50,6 +54,10 @@ case "$1" in
         ;;
     "onions")
         scripts/onions.bash "${@:2}"
+        exit "$?"
+        ;;
+    "lnd" )
+        scripts/lnd.bash "${@:2}"
         exit "$?"
         ;;
     "macaroons")

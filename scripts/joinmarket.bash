@@ -22,7 +22,7 @@ DAEMON_SERVICE=${DAEMON_SERVICE:-joinmarketd}
 
 # Is Join Market enabled?
 if ! ./start ps -q "$DAEMON_SERVICE" > /dev/null 2>&1; then
-    echo "Join Market service (joinmarketd) is not currently running."
+    echo "Join Market service ($DAEMON_SERVICE) is not currently running."
     echo "Was the Join Market override enabled?"
     echo "See: https://github.com/dmp1ce/BTC-Privacy-Suite#join-market"
     exit 1

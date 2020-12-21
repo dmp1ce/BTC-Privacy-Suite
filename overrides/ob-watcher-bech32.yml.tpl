@@ -9,7 +9,7 @@ x-rpc-settings: &rpc-settings
 services:
   ob-watcher-bech32:
     build:
-      context: docker/joinmarket-bech32
+      context: docker/joinmarket
     restart: always
     network_mode: service:tor
     depends_on:

@@ -22,6 +22,7 @@ x-jm-settings: &jm-settings
   JM_WALLET_FILE: "yg.jmdat"                # [filename] / Wallet file to use
   JM_WALLET_PASSWORD: "password"            # [string] / Password for the wallet
   JM_YG_SCRIPT: "yield-generator-basic.py"  # [filename, 'yield-generator-basic.py' or 'yg-privacyenhanced.py'] / Script to use for market making 
+  JM_NATIVE_SEGWIT: "false"
 
 services:
   joinmarket-yg:

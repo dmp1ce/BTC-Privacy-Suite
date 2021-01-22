@@ -25,7 +25,7 @@ x-jm-settings: &jm-settings
   JM_NATIVE_SEGWIT: "true"
 
 services:
-  joinmarket-bech32-yg1:
+  joinmarket-bech32-yg:
     build:
       context: docker/joinmarket
     restart: always

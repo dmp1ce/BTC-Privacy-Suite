@@ -1,4 +1,4 @@
-FROM dmp1ce/joinmarket:0.8.0
+FROM dmp1ce/joinmarket:0.8.2
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999
@@ -12,9 +12,8 @@ RUN apt-get update \
   && usermod -u "$LOCAL_USER_ID" joinmarket \
   && usermod -u "$LOCAL_USER_ID" -g joinmarket joinmarket \
   && ln -s /home/joinmarket/.joinmarket/commitmentlist /jm/clientserver/scripts/commitmentlist \
-  && echo "Move script logs out of the way to make room for symlink for data" \
+  && echo "Symlink tumber logs into data volume area" \
   && echo "This is an issue with upstream. Data directories shouldn't be in script directory" \
-  && mv /jm/clientserver/scripts/logs /jm/clientserver/scripts/_logs \
   && ln -s /home/joinmarket/.joinmarket/tumbler_logs /jm/clientserver/scripts/logs \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/*

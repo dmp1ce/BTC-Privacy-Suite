@@ -3,6 +3,7 @@
 /tor_config
 /lnd_data
 /node_data
+/lit_data
 /electrs_data
 /nginx_keys
 /joinmarket_data

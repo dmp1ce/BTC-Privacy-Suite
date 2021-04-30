@@ -14,11 +14,11 @@ services:
     volumes:
       - ./tor_data:/var/lib/tor:ro
       - ./tor_config:/etc/tor:ro
-      - ./lit_data/lit:/home/lit/.lit
-      - ./lit_data/faraday:/home/lit/.faraday
-      - ./lit_data/loop:/home/lit/.loop
-      - ./lit_data/pool:/home/lit/.pool
       - ./lnd_data:/home/lit/.lnd:ro
+      - ./.data/lit/lit:/home/lit/.lit
+      - ./.data/lit/faraday:/home/lit/.faraday
+      - ./.data/lit/loop:/home/lit/.loop
+      - ./.data/lit/pool:/home/lit/.pool
     command: litd
     env_file:
       - .env

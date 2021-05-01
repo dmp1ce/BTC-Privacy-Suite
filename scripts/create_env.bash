@@ -1,12 +1,9 @@
 #!/bin/bash
 
-continueYN() {
-    read -r -p "Continue (y/n)?" choice
-    case "$choice" in
-        y|Y ) ;;
-        * ) echo "Exiting"; exit 0;;
-    esac
-}
+DIR=${DIR:-.}
+
+# shellcheck source=continueYN.bash
+. "$DIR/scripts/continueYN.bash"
 
 # Create global .env if it doesn't exist already
 if [ ! -f "$DIR/.env" ]; then
@@ -21,7 +18,7 @@ correct before continuing!"
 fi
 
 # Create additional environment variable files for activated overrides
-required_envs=$(grep -ho "\w\+\.env" "$DIR"/overrides/*.yml)
+required_envs=$(grep -ho "\w\+\.env" "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml)
 for e in $required_envs
 do
     env_full_filename="$DIR/env/$e"

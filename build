@@ -2,8 +2,14 @@
 
 DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" >/dev/null 2>&1 && pwd )"
 
+# Make data directory if it doesn't exist already
+mkdir -p "$DIR/.data"
+
 # shellcheck source=scripts/create_env.bash
 . "$DIR/scripts/create_env.bash"
+
+# try to detect and warn user of duplicate variables
+. "$DIR/scripts/detect_duplicate_vars.bash"
 
 # Get list of overrides
 OVERRIDE_OPTIONS=()

@@ -35,8 +35,14 @@ Commands:
 
 The default command (no parameters) is \`up -d\`"
 
+# Make data directory if it doesn't exist already
+mkdir -p "$DIR/.data"
+
 # shellcheck source=scripts/create_env.bash
 . "$DIR/scripts/create_env.bash"
+
+# try to detect and warn user of duplicate variables
+. "$DIR/scripts/detect_duplicate_vars.bash"
 
 # Start LND, Bitcoin and Tor with added overrides
 CMD=""

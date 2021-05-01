@@ -44,6 +44,9 @@ mkdir -p "$DIR/.data"
 # try to detect and warn user of duplicate variables
 . "$DIR/scripts/detect_duplicate_vars.bash"
 
+# try to detect and warn user of old volume mounts
+. "$DIR/scripts/detect_old_data.bash"
+
 # Start LND, Bitcoin and Tor with added overrides
 CMD=""
 case "$1" in

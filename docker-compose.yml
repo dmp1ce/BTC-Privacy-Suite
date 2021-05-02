@@ -1,22 +1,17 @@
 version: '3.7'
 
-x-tor-data-ro: &tor-data-ro "./tor_data:/var/lib/tor:ro"
-x-tor-config-ro: &tor-config-ro "./tor_config:/etc/tor:ro"
-x-rpc-settings: &rpc-settings
-  RPCPASSWORD:
-  RPCUSER:
-x-network-settings: &network-settings
-  TESTNET_NUM:
-  ELECTRS_NETWORK:
-
+# Only Tor and Bitcoin are considered core services.
+# Even these services can be changed by adding an override in the 'override' directory.
 services:
   tor:
     build:
       context: docker/tor
     restart: always
     volumes:
-      - ./tor_data:/var/lib/tor
-      - ./tor_config:/etc/tor
+      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}
+      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}
+    env_file:
+      - .env
 
   bitcoin:
     build:
@@ -26,9 +21,9 @@ services:
     depends_on:
       - tor
     volumes:
-      - *tor-data-ro
-      - *tor-config-ro
-      - ./bitcoin_data:/home/bitcoin/.bitcoin
-    environment:
-      <<: *rpc-settings
-      <<: *network-settings
+      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
+      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
+      - ${_SRC_BITCOIN:?}:${_DST_BITCOIN:?}
+    env_file:
+      - .env
+      - env/bitcoin.env

@@ -1,14 +1,5 @@
 version: '3.7'
 
-x-tor-data-ro: &tor-data-ro "./tor_data:/var/lib/tor:ro"
-x-tor-config-ro: &tor-config-ro "./tor_config:/etc/tor:ro"
-x-rpc-settings: &rpc-settings
-  RPCPASSWORD:
-  RPCUSER:
-x-network-settings: &network-settings
-  TESTNET_NUM:
-  NETWORK:
-
 services:
   tor:
     ports:
@@ -26,14 +17,14 @@ services:
       - tor
       - bitcoin
     volumes:
-      - *tor-data-ro
-      - *tor-config-ro
-      - ./bitcoin_data:/home/user/.bitcoin:ro
-      - ./electrs_data:/home/user/.electrs
+      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
+      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
+      - ${_SRC_BITCOIN:?}:/home/user/.bitcoin:ro
+      - ${_SRC_ELECTRS_DATA:?}:${_DST_ELECTRS_DATA:?}
     command: /usr/local/cargo/bin/electrs -vvvv --timestamp --db-dir /home/user/.electrs/db
-    environment:
-      <<: *rpc-settings
-      <<: *network-settings
+    env_file:
+      - .env
+      - env/bitcoin.env
 
   # Use Nginx to enable TLS connections to electrs
   nginx:
@@ -45,4 +36,4 @@ services:
       - tor
       - electrs
     volumes:
-      - ./nginx_keys:/root/keys
+      - ${_SRC_ELECTRS_NGINX:?}:${_DST_ELECTRS_NGINX:?}

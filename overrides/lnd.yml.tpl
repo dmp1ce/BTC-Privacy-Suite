@@ -1,20 +1,5 @@
 version: '3.7'
 
-x-tor-data-ro: &tor-data-ro "./tor_data:/var/lib/tor:ro"
-x-tor-config-ro: &tor-config-ro "./tor_config:/etc/tor:ro"
-x-rpc-settings: &rpc-settings
-  RPCPASSWORD:
-  RPCUSER:
-x-lnd-settings: &lnd-settings
-  LND_ALIAS:
-  LND_COLOR:
-  LND_LISTEN_PORT:
-  LND_RPC_PORT:
-  LND_REST_PORT:
-x-network-settings: &network-settings
-  TESTNET_NUM:
-  ELECTRS_NETWORK:
-
 services:
   lnd:
     build:
@@ -25,14 +10,14 @@ services:
       - tor
       - bitcoin
     volumes:
-      - *tor-data-ro
-      - *tor-config-ro
-      - ./lnd_data:/home/lnd/.lnd
+      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
+      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
+      - ${_SRC_LND:?}:${_DST_LND:?}
     command: lnd
-    environment:
-      <<: *lnd-settings
-      <<: *rpc-settings
-      <<: *network-settings
+    env_file:
+      - .env
+      - env/bitcoin.env
+      - env/lnd.env
 
   tor:
     ports:

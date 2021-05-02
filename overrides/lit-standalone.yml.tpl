@@ -12,13 +12,13 @@ services:
       - bitcoin
       - lnd
     volumes:
-      - ./tor_data:/var/lib/tor:ro
-      - ./tor_config:/etc/tor:ro
-      - ./lnd_data:/home/lit/.lnd:ro
-      - ./.data/lit/lit:/home/lit/.lit
-      - ./.data/lit/faraday:/home/lit/.faraday
-      - ./.data/lit/loop:/home/lit/.loop
-      - ./.data/lit/pool:/home/lit/.pool
+      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
+      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
+      - ${_SRC_LND:?}:/home/lit/.lnd:ro
+      - ${_SRC_LIT_LIT:?}:${_DST_LIT_LIT:?}
+      - ${_SRC_LIT_FARADAY:?}:${_DST_LIT_FARADAY:?}
+      - ${_SRC_LIT_LOOP:?}:${_DST_LIT_LOOP:?}
+      - ${_SRC_LIT_POOL:?}:${_DST_LIT_POOL:?}
     command: litd
     env_file:
       - .env

@@ -1,0 +1,8 @@
+# Variables for LND
+
+# LND name and color
+LND_ALIAS=LND Node
+LND_COLOR=#ffffff
+LND_LISTEN_PORT=9735
+LND_RPC_PORT=10009
+LND_REST_PORT=8080

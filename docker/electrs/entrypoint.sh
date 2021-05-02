@@ -7,12 +7,8 @@ if [ ! -f "/home/user/.electrs/config.toml" ]; then
 fi
 
 # Change local user id and group
-if [ -n "${LOCAL_USER_ID}" ]; then
-    usermod -u "$LOCAL_USER_ID" user
-fi
-if [ -n "${LOCAL_GROUP_ID}" ]; then
-    groupmod -g "$LOCAL_GROUP_ID" user
-fi
+usermod -u "${LOCAL_USER_ID:?}" user
+groupmod -g "${LOCAL_GROUP_ID:?}" user
 
 # Fix ownership
 chown -R user /home/user/.electrs

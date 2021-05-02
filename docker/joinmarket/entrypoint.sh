@@ -18,12 +18,8 @@ if [ ! -f "$JM_HOME/.joinmarket/joinmarket.cfg" ]; then
 fi
 
 # Change local user id and group
-if [ -n "${LOCAL_USER_ID}" ]; then
-    usermod -u "$LOCAL_USER_ID" joinmarket
-fi
-if [ -n "${LOCAL_GROUP_ID}" ]; then
-    groupmod -g "$LOCAL_GROUP_ID" joinmarket
-fi
+usermod -u "${LOCAL_USER_ID:?}" joinmarket
+groupmod -g "${LOCAL_GROUP_ID:?}" joinmarket
 
 # Run command as joinmarket user
 cd /jm/clientserver/scripts

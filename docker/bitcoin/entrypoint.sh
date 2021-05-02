@@ -9,12 +9,10 @@ fi
 _USER_ID="$(id -u)"
 
 # Change local user id and group
-if [ -n "${LOCAL_USER_ID}" ] && [ "$_USER_ID" != "${LOCAL_USER_ID}" ]; then
-    usermod -u "$LOCAL_USER_ID" bitcoin
+if [ -n "${LOCAL_USER_ID:?}" ] && [ "$_USER_ID" != "${LOCAL_USER_ID:?}" ]; then
+    usermod -u "${LOCAL_USER_ID:?}" bitcoin
 fi
-if [ -n "${LOCAL_GROUP_ID}" ]; then
-    groupmod -g "$LOCAL_GROUP_ID" bitcoin
-fi
+groupmod -g "${LOCAL_GROUP_ID:?}" bitcoin
 
 # Fix ownership
 chown -R bitcoin /home/bitcoin

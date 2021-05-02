@@ -7,13 +7,8 @@ if [ ! -f "/home/lnd/.lnd/lnd.conf" ]; then
 fi
 
 # Change local user id and group
-if [ -n "${LOCAL_USER_ID}" ]; then
-    usermod -u "$LOCAL_USER_ID" lnd
-fi
-if [ -n "${LOCAL_GROUP_ID}" ]; then
-    groupmod -g "$LOCAL_GROUP_ID" lnd
-fi
-
+usermod -u "${LOCAL_USER_ID:?}" lnd
+groupmod -g "${LOCAL_GROUP_ID:?}" lnd
 
 # Fix ownership
 chown -R lnd /home/lnd

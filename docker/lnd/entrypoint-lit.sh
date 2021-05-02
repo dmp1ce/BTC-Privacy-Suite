@@ -7,12 +7,8 @@ if [ ! -f "/home/lit/.lit/lit.conf" ]; then
 fi
 
 # Change local user id and group
-if [ -n "${LOCAL_USER_ID}" ]; then
-    usermod -u "$LOCAL_USER_ID" lit
-fi
-if [ -n "${LOCAL_GROUP_ID}" ]; then
-    groupmod -g "$LOCAL_GROUP_ID" lit
-fi
+usermod -u "${LOCAL_USER_ID:?}" lit
+usermod -u "${LOCAL_GROUP_ID:?}" lit
 
 # Fix ownership
 chown -R lit "${_DST_LIT_LIT:?}"

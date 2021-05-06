@@ -4,7 +4,7 @@ services:
   ob-watcher-bech32:
     build:
       context: docker/joinmarket
-    restart: always
+    restart: unless-stopped
     network_mode: service:tor
     depends_on:
       - joinmarketd-bech32

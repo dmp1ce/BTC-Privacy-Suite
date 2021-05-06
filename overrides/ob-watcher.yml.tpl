@@ -4,7 +4,7 @@ services:
   ob-watcher:
     build:
       context: docker/joinmarket
-    restart: always
+    restart: unless-stopped
     network_mode: service:tor
     depends_on:
       - joinmarketd

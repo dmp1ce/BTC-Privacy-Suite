@@ -1,0 +1,34 @@
+{
+  "multiPass": "${RTL_INITIAL_PASSWORD}",
+  "port": "${RTL_WEB_PORT}",
+  "defaultNodeIndex": 1,
+  "SSO": {
+    "rtlSSO": 0,
+    "rtlCookiePath": "",
+    "logoutRedirectLink": ""
+  },
+  "nodes": [
+    {
+      "index": 1,
+      "lnNode": "${RTL_NODE_NAME}",
+      "lnImplementation": "LND",
+      "Authentication": {
+        "macaroonPath": "/home/node/.lnd/data/chain/bitcoin/${NETWORK}",
+        "configPath": "/home/node/.lnd/lnd.conf",
+        "swapMacaroonPath": "",
+        "boltzMacaroonPath": ""
+      },
+      "Settings": {
+        "userPersona": "MERCHANT",
+        "themeMode": "DAY",
+        "themeColor": "PURPLE",
+        "channelBackupPath": "${_DST_RTL}/backup-lnd",
+        "enableLogging": false,
+        "lnServerUrl": "https://localhost:${LND_REST_PORT}",
+        "swapServerUrl": "",
+        "boltzServerUrl": "",
+        "fiatConversion": false
+      }
+    }
+  ]
+}

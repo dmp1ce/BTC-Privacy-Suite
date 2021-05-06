@@ -39,3 +39,7 @@ _SRC_LIT_LOOP=./.data/lit/loop
 _DST_LIT_LOOP=/home/lit/.loop
 _SRC_LIT_POOL=./.data/lit/pool
 _DST_LIT_POOL=/home/lit/.pool
+
+# RTL mounts
+_SRC_RTL=./.data/rtl
+_DST_RTL=/home/node/.rtl

@@ -73,6 +73,10 @@ case "$1" in
         scripts/macaroons.bash "${@:2}"
         exit "$?"
         ;;
+    "bos" )
+        scripts/bos.bash "${@:2}"
+        exit "$?"
+        ;;
     "")
         CMD=(up -d)
         ;;

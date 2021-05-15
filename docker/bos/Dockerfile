@@ -10,8 +10,6 @@ USER root
 
 # Setup user and group
 # Bash auto completion for bos
-# Timezone
-# Cron directories for user
 RUN apt-get update \
     && apt-get install --no-install-recommends -yq \
       sudo=1.* gettext-base=0.* bash-completion=1:2.* \

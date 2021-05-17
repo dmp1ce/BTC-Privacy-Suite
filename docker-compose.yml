@@ -1,7 +1,9 @@
-version: '3.7'
+version: '3.8'
 
-# Only Tor and Bitcoin are considered core services.
-# Even these services can be changed by adding an override in the 'override' directory.
+# Only Tor is currently required.
+# Even Tor can be changed by adding an override in the 'override' directory.
+# Other services such as bitcoind and lnd require an override.
+# Example: `cp overrides/bitcoin.yml.tpl overrides/bitcoin.yml`
 services:
   tor:
     build:
@@ -12,18 +14,3 @@ services:
       - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}
     env_file:
       - .env
-
-  bitcoin:
-    build:
-      context: docker/bitcoin
-    restart: always
-    network_mode: service:tor
-    depends_on:
-      - tor
-    volumes:
-      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
-      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
-      - ${_SRC_BITCOIN:?}:${_DST_BITCOIN:?}
-    env_file:
-      - .env
-      - env/bitcoin.env

@@ -42,7 +42,12 @@ migrated to '.data' before continuing."
         esac
     fi
 
-    config_changes_needed=$(grep "$d" overrides/*.yml ./*.yml)
+    if compgen -G "${DIR}/overrides/*.yml" > /dev/null; then
+        config_changes_needed=$(grep "$d" "$DIR"/overrides/*.yml "$DIR"/*.yml)
+    else
+        config_changes_needed=$(grep "$d" "$DIR"/*.yml)
+    fi
+
     if [ -n "$config_changes_needed" ]; then
         detected_problem=t
         pWARNING "Old data configuration detected! Update yml files below:"

@@ -7,7 +7,11 @@ DIR=${DIR:-.}
 # shellcheck source=continueYN.bash
 . "$DIR/scripts/continueYN.bash"
 
-mapfile -t required_envs < <(grep -ho "env\/\w\+\.env" "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml)
+if compgen -G "${DIR}/overrides/*.yml" > /dev/null; then
+    mapfile -t required_envs < <(grep -ho "env\/[a-zA-Z0-9_-]\+\.env" "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml)
+else
+    mapfile -t required_envs < <(grep -ho "env\/[a-zA-Z0-9_-]\+\.env" "$DIR"/docker-compose.yml)
+fi
 required_envs+=(".env")
 
 # For the second loop
@@ -36,8 +40,8 @@ for e in "${required_envs[@]}"; do
                     echo "WARNING: Detected duplicate variable '$k' in '$e' and '$e2' env files!"
                     dup_detected=1
                 fi
-            done < <(grep -ho "^\w\+" < "$e2_real")
-        done < <(grep -ho "^\w\+" < "$e_real")
+            done < <(grep -ho "^[a-zA-Z0-9_-]\+" < "$e2_real")
+        done < <(grep -ho "^[a-zA-Z0-9_-]\+" < "$e_real")
 
         if [ $dup_detected = 1 ]; then continueYN; fi
     done

@@ -18,7 +18,12 @@ correct before continuing!"
 fi
 
 # Create additional environment variable files for activated overrides
-required_envs=$(grep -ho "\w\+\.env" "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml)
+if compgen -G "${DIR}/overrides/*.yml" > /dev/null; then
+    required_envs=$(grep -ho "[a-zA-Z0-9_-]\+\.env" "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml)
+else
+    required_envs=$(grep -ho "[a-zA-Z0-9_-]\+\.env" "$DIR"/docker-compose.yml)
+fi
+
 for e in $required_envs
 do
     env_full_filename="$DIR/env/$e"

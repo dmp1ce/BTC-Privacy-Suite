@@ -49,3 +49,7 @@ _GUEST_LIT_POOL=/home/lit/.pool
 # RTL mounts
 _HOST_RTL=./.data/rtl
 _GUEST_RTL=/home/node/.rtl
+
+# Sphinx Chat
+_SPHINX_CHAT_PORT_GUEST=3001
+_SPHINX_CHAT_PORT_HOST=3001

@@ -8,14 +8,12 @@ services:
     network_mode: service:tor
     depends_on:
       - tor
-      - bitcoin
     volumes:
       - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
       - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
       - ${_HOST_LND:?}:${_GUEST_LND:?}
     command: lnd
     env_file:
-      - .env
       - env/bitcoin.env
       - env/lnd.env
     environment:
@@ -27,6 +25,6 @@ services:
   tor:
     ports:
       # LND Rest
-      - "8080:8080"
+      - "${_HOST_LND_REST_PORT:?}:${_GUEST_LND_REST_PORT:?}"
       # LND RPC
-      - "10009:10009"
+      - "${_HOST_LND_RPC_PORT:?}:${_GUEST_LND_RPC_PORT:?}"

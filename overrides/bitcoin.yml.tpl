@@ -9,9 +9,9 @@ services:
     depends_on:
       - tor
     volumes:
-      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
-      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
-      - ${_SRC_BITCOIN:?}:${_DST_BITCOIN:?}
+      - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
+      - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
+      - ${_HOST_BITCOIN:?}:${_GUEST_BITCOIN:?}
     env_file:
       - .env
       - env/bitcoin.env

@@ -12,13 +12,13 @@ services:
       - bitcoin
       - lnd
     volumes:
-      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
-      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
-      - ${_SRC_LND:?}:/home/lit/.lnd:ro
-      - ${_SRC_LIT_LIT:?}:${_DST_LIT_LIT:?}
-      - ${_SRC_LIT_FARADAY:?}:${_DST_LIT_FARADAY:?}
-      - ${_SRC_LIT_LOOP:?}:${_DST_LIT_LOOP:?}
-      - ${_SRC_LIT_POOL:?}:${_DST_LIT_POOL:?}
+      - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
+      - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
+      - ${_HOST_LND:?}:/home/lit/.lnd:ro
+      - ${_HOST_LIT_LIT:?}:${_GUEST_LIT_LIT:?}
+      - ${_HOST_LIT_FARADAY:?}:${_GUEST_LIT_FARADAY:?}
+      - ${_HOST_LIT_LOOP:?}:${_GUEST_LIT_LOOP:?}
+      - ${_HOST_LIT_POOL:?}:${_GUEST_LIT_POOL:?}
     command: litd
     env_file:
       - .env

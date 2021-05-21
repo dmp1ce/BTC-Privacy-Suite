@@ -7,39 +7,45 @@ LOCAL_GROUP_ID=${LOCAL_USER_GROUP}
 # Additional variables for various service yml files.
 
 # Tor mounts
-_SRC_TOR_DATA=./.data/tor/data
-_DST_TOR_DATA=/var/lib/tor
-_SRC_TOR_CONFIG=./.data/tor/config
-_DST_TOR_CONFIG=/etc/tor
+_HOST_TOR_DATA=./.data/tor/data
+_GUEST_TOR_DATA=/var/lib/tor
+_HOST_TOR_CONFIG=./.data/tor/config
+_GUEST_TOR_CONFIG=/etc/tor
 
 # Bitcoin mounts
-_SRC_BITCOIN=./.data/bitcoin
-_DST_BITCOIN=/home/bitcoin/.bitcoin
+_HOST_BITCOIN=./.data/bitcoin
+_GUEST_BITCOIN=/home/bitcoin/.bitcoin
 
 # LND mounts
-_SRC_LND=./.data/lnd
-_DST_LND=/home/lnd/.lnd
+_HOST_LND=./.data/lnd
+_GUEST_LND=/home/lnd/.lnd
+
+# LND ports
+_HOST_LND_REST_PORT=8080
+_GUEST_LND_REST_PORT=8080
+_HOST_LND_RPC_PORT=10009
+_GUEST_LND_RPC_PORT=10009
 
 # ElectRS mounts
-_SRC_ELECTRS_DATA=./.data/electrs/electrs
-_DST_ELECTRS_DATA=/home/user/.electrs
-_SRC_ELECTRS_NGINX=./.data/electrs/nginx
-_DST_ELECTRS_NGINX=/root/keys
+_HOST_ELECTRS_DATA=./.data/electrs/electrs
+_GUEST_ELECTRS_DATA=/home/user/.electrs
+_HOST_ELECTRS_NGINX=./.data/electrs/nginx
+_GUEST_ELECTRS_NGINX=/root/keys
 
 # JoinMarket mounts
-_SRC_JOINMARKET=./.data/joinmarket
-_DST_JOINMARKET=/home/joinmarket/.joinmarket
+_HOST_JOINMARKET=./.data/joinmarket
+_GUEST_JOINMARKET=/home/joinmarket/.joinmarket
 
 # Lightning Terminal mounts
-_SRC_LIT_LIT=./.data/lit/lit
-_DST_LIT_LIT=/home/lit/.lit
-_SRC_LIT_FARADAY=./.data/lit/faraday
-_DST_LIT_FARADAY=/home/lit/.faraday
-_SRC_LIT_LOOP=./.data/lit/loop
-_DST_LIT_LOOP=/home/lit/.loop
-_SRC_LIT_POOL=./.data/lit/pool
-_DST_LIT_POOL=/home/lit/.pool
+_HOST_LIT_LIT=./.data/lit/lit
+_GUEST_LIT_LIT=/home/lit/.lit
+_HOST_LIT_FARADAY=./.data/lit/faraday
+_GUEST_LIT_FARADAY=/home/lit/.faraday
+_HOST_LIT_LOOP=./.data/lit/loop
+_GUEST_LIT_LOOP=/home/lit/.loop
+_HOST_LIT_POOL=./.data/lit/pool
+_GUEST_LIT_POOL=/home/lit/.pool
 
 # RTL mounts
-_SRC_RTL=./.data/rtl
-_DST_RTL=/home/node/.rtl
+_HOST_RTL=./.data/rtl
+_GUEST_RTL=/home/node/.rtl

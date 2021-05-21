@@ -17,10 +17,10 @@ services:
       - tor
       - bitcoin
     volumes:
-      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
-      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
-      - ${_SRC_BITCOIN:?}:/home/user/.bitcoin:ro
-      - ${_SRC_ELECTRS_DATA:?}:${_DST_ELECTRS_DATA:?}
+      - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
+      - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
+      - ${_HOST_BITCOIN:?}:/home/user/.bitcoin:ro
+      - ${_HOST_ELECTRS_DATA:?}:${_GUEST_ELECTRS_DATA:?}
     command: /usr/local/cargo/bin/electrs -vvvv --timestamp --db-dir /home/user/.electrs/db
     env_file:
       - .env
@@ -36,4 +36,4 @@ services:
       - tor
       - electrs
     volumes:
-      - ${_SRC_ELECTRS_NGINX:?}:${_DST_ELECTRS_NGINX:?}
+      - ${_HOST_ELECTRS_NGINX:?}:${_GUEST_ELECTRS_NGINX:?}

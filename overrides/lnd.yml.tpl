@@ -10,14 +10,19 @@ services:
       - tor
       - bitcoin
     volumes:
-      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
-      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
-      - ${_SRC_LND:?}:${_DST_LND:?}
+      - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
+      - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
+      - ${_HOST_LND:?}:${_GUEST_LND:?}
     command: lnd
     env_file:
       - .env
       - env/bitcoin.env
       - env/lnd.env
+    environment:
+      LOCAL_USER_ID: ${LOCAL_USER_ID:?}
+      LOCAL_GROUP_ID: ${LOCAL_GROUP_ID:?}
+      LND_RPC_PORT: ${_GUEST_LND_RPC_PORT:?}
+      LND_REST_PORT: ${_GUEST_LND_REST_PORT:?}
 
   tor:
     ports:

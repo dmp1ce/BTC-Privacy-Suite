@@ -10,9 +10,9 @@ services:
       - tor
       - bitcoin
     volumes:
-      - ${_SRC_TOR_DATA:?}:${_DST_TOR_DATA:?}:ro
-      - ${_SRC_TOR_CONFIG:?}:${_DST_TOR_CONFIG:?}:ro
-      - ./.data/joinmarket_bech32:${_DST_JOINMARKET:?}
+      - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
+      - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
+      - ./.data/joinmarket_bech32:${_GUEST_JOINMARKET:?}
     command: python3 joinmarketd.py 26183
     tty: true
     env_file:

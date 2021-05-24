@@ -53,6 +53,9 @@ case "$1" in
     "restart" | "up" | "logs" | "ps" | "stop" | "exec" | "kill" | "rm" | "run" | "config" )
         read -r -a CMD <<< "$@"
         ;;
+    "docker-compose")
+        read -r -a CMD <<< "${@:2}"
+        ;;
     "jm")
         scripts/joinmarket.bash "${@:2}"
         exit "$?"

@@ -106,8 +106,15 @@ do
     OVERRIDE_OPTIONS+=("$f")
 done
 
+# Setup Docker Compose command
+if docker info &>/dev/null; then
+    DOCKER_COMPOSE_CMD=(docker-compose)
+else
+    DOCKER_COMPOSE_CMD=(sudo docker-compose)
+fi
+
 # Start docker-compose with override options
 if [ "$VERBOSE" ]; then
-   echo docker-compose -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"
+   echo "${DOCKER_COMPOSE_CMD[@]}" -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"
 fi
-cd "$DIR" && exec docker-compose -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"
+cd "$DIR" && exec "${DOCKER_COMPOSE_CMD[@]}" -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" "${CMD[@]}"

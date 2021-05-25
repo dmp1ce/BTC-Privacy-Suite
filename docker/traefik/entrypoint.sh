@@ -11,7 +11,7 @@ usermod -u "${LOCAL_USER_ID:?}" traefik
 groupmod -g "${LOCAL_GROUP_ID:?}" traefik
 
 # Fix ownership
-chown -R traefik /home/traefik/data
+chown -R traefik:traefik /home/traefik/data
 
 # Start upstream entrypoint
 exec /entrypoint.sh "$@"

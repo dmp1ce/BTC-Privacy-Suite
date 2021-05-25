@@ -1,0 +1,3 @@
+[providers.docker]
+    exposedByDefault = false
+    endpoint = "tcp://localhost:2375"

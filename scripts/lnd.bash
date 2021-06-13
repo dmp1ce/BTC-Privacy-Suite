@@ -29,12 +29,11 @@ fi
 CMD=""
 case "$1" in
     "unlock" | "create" )
-        # Get the RPC port from lnd.conf
-        #pwd
-        #grep rpclisten ~/.lnd/lnd.conf
-        #CMD="lncli --rpcserver=\$\(grep rpclisten ~/.lnd/lnd.conf | grep -oE "\\d+$"\) $*"
-
         CMD="./scripts/lncli.sh $*"
+        ;;
+
+    "lncli")
+        CMD="./scripts/lncli.sh ${*:2}"
         ;;
 
     "macaroons" )

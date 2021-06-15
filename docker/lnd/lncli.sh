@@ -12,4 +12,4 @@ if [ "$TESTNET" = 1 ]; then
 fi
 
 # Apply network, RPC port and use all arguments passed in
-lncli ${NETWORK:+-n "$NETWORK"} --rpcserver="localhost:$RPC_PORT" "$*"
+exec lncli ${NETWORK:+-n "$NETWORK"} --rpcserver="localhost:$RPC_PORT" "$@"

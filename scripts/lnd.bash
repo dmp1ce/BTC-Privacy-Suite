@@ -29,11 +29,12 @@ fi
 CMD=""
 case "$1" in
     "unlock" | "create" )
-        CMD="./scripts/lncli.sh $*"
+        CMD=(./scripts/lncli.sh "${@}")
         ;;
 
     "lncli")
-        CMD="./scripts/lncli.sh ${*:2}"
+        echo "(lnd.bash) Parameter count: $#"
+        CMD=(./scripts/lncli.sh "${@:2}")
         ;;
 
     "macaroons" )
@@ -50,7 +51,7 @@ case "$1" in
             macaroon_name="$3"
         fi
 
-        CMD="./scripts/get_macaroons.sh $network $macaroon_name"
+        CMD=(./scripts/get_macaroons.sh "$network" "$macaroon_name")
         ;;
 
     "" | "help" | "--help" | "-h" )
@@ -58,8 +59,8 @@ case "$1" in
         exit
         ;;
     *)
-        CMD="$*"
+        CMD=("$@")
         ;;
 esac
 
-exec ./start exec -u lnd "$SERVICE" "$CMD"
+exec ./start exec -u lnd "$SERVICE" "${CMD[@]}"

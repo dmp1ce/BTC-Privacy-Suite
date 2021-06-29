@@ -16,10 +16,15 @@ services:
       - ${_HOST_RTL:?}:${_GUEST_RTL:?}
     command: node rtl
     env_file:
-      - .env
       - env/bitcoin.env
       - env/lnd.env
       - env/rtl.env
+    environment:
+      LOCAL_USER_ID: ${LOCAL_USER_ID:?}
+      LOCAL_GROUP_ID: ${LOCAL_GROUP_ID:?}
+      LND_RPC_PORT: ${_GUEST_LND_RPC_PORT:?}
+      LND_REST_PORT: ${_GUEST_LND_REST_PORT:?}
+      RTL_DIR: ${_GUEST_RTL:?}
 
   tor:
     ports:

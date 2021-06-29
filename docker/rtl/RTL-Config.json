@@ -22,7 +22,7 @@
         "userPersona": "MERCHANT",
         "themeMode": "DAY",
         "themeColor": "PURPLE",
-        "channelBackupPath": "${_GUEST_RTL}/backup-lnd",
+        "channelBackupPath": "${RTL_DIR}/backup-lnd",
         "enableLogging": false,
         "lnServerUrl": "https://localhost:${LND_REST_PORT}",
         "swapServerUrl": "",

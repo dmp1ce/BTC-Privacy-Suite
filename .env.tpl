@@ -1,4 +1,4 @@
-# Variables here are used by all services
+# Build variables used by all services
 
 # local user and group id used by contains to make sure file ownership matches local user
 LOCAL_USER_ID=${LOCAL_USER_ID}

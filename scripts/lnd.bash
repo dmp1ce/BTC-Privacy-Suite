@@ -33,7 +33,6 @@ case "$1" in
         ;;
 
     "lncli")
-        echo "(lnd.bash) Parameter count: $#"
         CMD=(./scripts/lncli.sh "${@:2}")
         ;;
 

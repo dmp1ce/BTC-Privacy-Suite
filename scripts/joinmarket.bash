@@ -32,34 +32,34 @@ CMD=""
 WALLET="${WALLET:-wallet.jmdat}"
 case "$1" in
     "generate" )
-        CMD="wallet-tool.py $*"
+        CMD=(wallet-tool.py "${@}")
         ;;
     "display" | "displayall" | "summary" | "history" | "recover" \
         | "showseed" | "importprivkey" | "dumpprivkey" | "signmessage" | "freeze" )
         # Assume using default options for wallet-tool.py
-        CMD="wallet-tool.py $WALLET $*"
+        CMD=(wallet-tool.py "$WALLET" "$@")
         ;;
     "wallet-tool")
-        CMD="wallet-tool.py $WALLET ${*:2}"
+        CMD=(wallet-tool.py "$WALLET" "${@:2}")
         ;;
     "sendpayment")
-        CMD="sendpayment.py $WALLET ${*:2}"
+        CMD=(sendpayment.py "$WALLET" "${@:2}")
         ;;
     "tumbler")
-        CMD="tumbler.py $WALLET ${*:2}"
+        CMD=(tumbler.py "$WALLET" "${@:2}")
         ;;
     "" | "help")
         echo "$HELP"
         exit
         ;;
     *)
-        END_COMMAND="$*"
+        END_COMMAND=("$@")
         ;;
 esac
 
-PYTHON_CMD="python3 "
-if [ -n "$CMD" ]; then
-    END_COMMAND="$PYTHON_CMD$CMD"
+PYTHON_CMD="python3"
+if [ 0 -lt "${#CMD[@]}" ]; then
+    END_COMMAND=( "$PYTHON_CMD" "${CMD[@]}" )
 fi
 
-exec ./start exec --workdir=/jm/clientserver/scripts "$DAEMON_SERVICE" gosu joinmarket "$END_COMMAND"
+exec ./start exec --workdir=/jm/clientserver/scripts "$DAEMON_SERVICE" gosu joinmarket "${END_COMMAND[@]}"

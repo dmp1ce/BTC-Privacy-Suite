@@ -1,4 +1,4 @@
-FROM electrs-p2p
+FROM dmp1ce/electrs:0.8.9
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

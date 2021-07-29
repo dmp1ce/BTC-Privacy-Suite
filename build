@@ -32,4 +32,4 @@ fi
 
 exec "${DOCKER_COMPOSE_CMD[@]}" -f docker-compose.yml "${OVERRIDE_OPTIONS[@]}" build \
      --build-arg LOCAL_USER_ID="$(id -u "${USER:?}")" \
-     --build-arg LOCAL_GROUP_ID="$(id -g "${USER:?}")"
+     --build-arg LOCAL_GROUP_ID="$(id -g "${USER:?}")" "$@"

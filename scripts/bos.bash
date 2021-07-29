@@ -29,8 +29,8 @@ case "$1" in
         exit
         ;;
     *)
-        CMD="$*"
+        CMD=("$@")
         ;;
 esac
 
-exec ./start exec -u node "$SERVICE" "$CMD"
+exec ./start exec -u node "$SERVICE" "${CMD[@]}"

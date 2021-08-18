@@ -28,7 +28,7 @@ if ! ./start ps -q "$DAEMON_SERVICE" > /dev/null 2>&1; then
     exit 1
 fi
 
-CMD=""
+CMD=()
 WALLET="${WALLET:-wallet.jmdat}"
 case "$1" in
     "generate" )

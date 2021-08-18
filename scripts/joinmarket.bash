@@ -34,8 +34,9 @@ case "$1" in
     "generate" )
         CMD=(wallet-tool.py "${@}")
         ;;
-    "display" | "displayall" | "summary" | "history" | "recover" \
-        | "showseed" | "importprivkey" | "dumpprivkey" | "signmessage" | "freeze" )
+    "display" | "displayall" | "summary" | "history" | "recover" | "changepass" | "showutxos" \
+        | "showseed" | "importprivkey" | "dumpprivkey" | "signpsbt" | "signmessage" \
+        | "freeze" | "gettimelockaddress" | "addtxoutproof" | "createwatchonly" )
         # Assume using default options for wallet-tool.py
         CMD=(wallet-tool.py "$WALLET" "$@")
         ;;

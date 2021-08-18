@@ -13,7 +13,7 @@ services:
       - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
       - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
       - ./.data/joinmarket_bech32:${_GUEST_JOINMARKET:?}
-    command: python3 joinmarketd.py 26183
+    command: python3 joinmarketd.py 27173
     tty: true
     env_file:
       - .env

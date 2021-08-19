@@ -6,8 +6,10 @@ Commands:
   generate                                  - generate a new wallet
 
   display, displayall, summary, history,
-  recover, showseed, importprivkey,
-  dumpprivkey, signmessage, freeze          - Wallet functions
+  recover, changepass, showutxos, showseed,
+  importprivkey, dumpprivkey, signpsbt,
+  signmessage, freeze, gettimelockaddress,
+  addtxoutproof, createwatchonly            - Wallet functions
 
   wallet-tool                               - Directly use wallet-tool.py script
 

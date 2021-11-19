@@ -1,4 +1,4 @@
-FROM lightninglabs/lightning-terminal:v0.4.1-alpha
+FROM lightninglabs/lightning-terminal:v0.5.3-alpha
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999
@@ -9,7 +9,7 @@ USER root
 
 # Set the expected local user id
 # for shared group to access tor cookie
-RUN apk --no-cache --no-progress add shadow=~4 sudo=~1 gettext=~0.20 \
+RUN apk --no-cache --no-progress add shadow=~4 sudo=~1 gettext=~0.21 \
     && groupadd -r lit\
     && useradd --no-log-init -r -g lit lit\
     && mkdir -p /home/lit\

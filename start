@@ -107,22 +107,29 @@ do
 done
 
 # Setup Docker Compose command
-# Pass in sudo command if required
+# Pass in 1 for sudo
 set_compose_command() {
-    __SUDO=$1
     if $__SUDO docker compose &>/dev/null; then
-        DOCKER_COMPOSE_CMD=("$__SUDO" docker compose)
+        if [ "$1" == 1 ]; then
+            DOCKER_COMPOSE_CMD=(sudo docker compose)
+        else
+            DOCKER_COMPOSE_CMD=(docker compose)
+        fi
     elif $__SUDO docker-compose &>/dev/null; then
-        DOCKER_COMPOSE_CMD=("$__SUDO" docker-compose)
+        if [ "$1" == 1 ]; then
+            DOCKER_COMPOSE_CMD=(sudo docker-compose)
+        else
+            DOCKER_COMPOSE_CMD=(docker-compose)
+        fi
     else
         echo "Please make sure Docker Compose is installed"
     fi
 }
 
 if docker info &>/dev/null; then
-    set_compose_command ""
+    set_compose_command
 else
-    set_compose_command "sudo"
+    set_compose_command 1
 fi
 
 # Start docker-compose with override options

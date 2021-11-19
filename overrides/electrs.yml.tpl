@@ -21,7 +21,7 @@ services:
       - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
       - ${_HOST_BITCOIN:?}:/home/user/.bitcoin:ro
       - ${_HOST_ELECTRS_DATA:?}:${_GUEST_ELECTRS_DATA:?}
-    command: /usr/local/cargo/bin/electrs -vvvv --timestamp --db-dir /home/user/.electrs/db
+    command: /usr/bin/electrs --timestamp --db-dir /home/user/.electrs/db
     env_file:
       - .env
       - env/bitcoin.env

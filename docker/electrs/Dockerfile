@@ -1,4 +1,4 @@
-FROM dmp1ce/electrs:0.8.9
+FROM dmp1ce/electrs:0.9.2
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999
@@ -16,7 +16,7 @@ RUN apt-get update \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
   && groupadd -g "$LOCAL_GROUP_ID" user \
-  && usermod -u "$LOCAL_USER_ID" -g user user
+  && useradd -u "$LOCAL_USER_ID" -g user user
 
 COPY entrypoint.sh /root/entrypoint.sh
 COPY electrs.toml /tmp/electrs.toml

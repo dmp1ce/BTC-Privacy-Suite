@@ -1,4 +1,4 @@
-FROM dmp1ce/joinmarket:0.9.1
+FROM dmp1ce/joinmarket:0.9.3
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999

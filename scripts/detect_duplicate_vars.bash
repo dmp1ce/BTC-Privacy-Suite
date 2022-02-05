@@ -8,6 +8,7 @@ DIR=${DIR:-.}
 . "$DIR/scripts/continueYN.bash"
 
 # Loop through each yml file
+shopt -s nullglob
 for yml in "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml; do
 
     mapfile -t required_envs < <(grep -ho "env\/[a-zA-Z0-9_-]\+\.env" "$yml")

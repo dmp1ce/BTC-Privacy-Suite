@@ -14,14 +14,14 @@ for s in $RUNNING_SERVICES; do
 
     # Bitcoin onion
     if [[ $s == bitcoin ]]; then
-        bitcoin_onion="$(./start exec -u bitcoin bitcoin bitcoin-cli getnetworkinfo | python3 -c "import sys, json; print(json.load(sys.stdin)['localaddresses'][0]['address'])")"
+        bitcoin_onion="$(./start exec -T -u bitcoin bitcoin bitcoin-cli getnetworkinfo | python3 -c "import sys, json; print(json.load(sys.stdin)['localaddresses'][0]['address'])")"
         echo "Bitcoin Server: $bitcoin_onion"
         FOUND_ONION=1
     fi
 
     # LND onion
     if [[ $s == *lnd* ]]; then
-        lnd_onion="$(./start lnd lncli getinfo | python3 -c "import sys, json; print(json.load(sys.stdin)['uris'][0])")"
+        lnd_onion="$(EXEC_ARGS="-T" ./start lnd lncli getinfo | python3 -c "import sys, json; print(json.load(sys.stdin)['uris'][0])")"
         echo "$s server: $lnd_onion"
         FOUND_ONION=1
     fi

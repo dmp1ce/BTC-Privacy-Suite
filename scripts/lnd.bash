@@ -17,6 +17,11 @@ Override the LND service by setting the \"SERVICE\" environment variable.
 Example SERVICE=lnd-secondary ./scripts/lnd.bash sh."
 
 SERVICE=${SERVICE:-lnd}
+if [ -n "$EXEC_ARGS" ]; then
+    EXEC_ARGS=("${EXEC_ARGS}")
+else
+    EXEC_ARGS=()
+fi
 
 # Is LND enabled?
 if ! ./start ps -q "$SERVICE" > /dev/null 2>&1; then
@@ -62,4 +67,4 @@ case "$1" in
         ;;
 esac
 
-exec ./start exec -u lnd "$SERVICE" "${CMD[@]}"
+exec ./start exec "${EXEC_ARGS[@]}" -u lnd "$SERVICE" "${CMD[@]}"

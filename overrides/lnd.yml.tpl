@@ -8,10 +8,12 @@ services:
     network_mode: service:tor
     depends_on:
       - tor
+      - bitcoin
     volumes:
       - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
       - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
       - ${_HOST_LND:?}:${_GUEST_LND:?}
+      - ${_HOST_BITCOIN:?}:/home/lnd/.bitcoin:ro
     command: lnd
     env_file:
       - env/bitcoin.env

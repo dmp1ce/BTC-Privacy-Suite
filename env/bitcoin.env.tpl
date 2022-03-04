@@ -3,8 +3,8 @@
 # These variables are also be used to access bitcoind for some services
 
 # Change RPC user and password to secure RPC access
-RPCUSER=alice
-RPCPASSWORD=some_password_here
+# RPCUSER=alice
+# RPCPASSWORD=some_password_here
 
 # testnet for bitcoin and lnd:
 # 0 = testnet off, 1 = testnet on

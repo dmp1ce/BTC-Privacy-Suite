@@ -11,7 +11,9 @@ usermod -u "${LOCAL_USER_ID:?}" lnd
 groupmod -g "${LOCAL_GROUP_ID:?}" lnd
 
 # Fix ownership
-chown -R lnd /home/lnd
+chown lnd /home/lnd
+chown -R lnd /home/lnd/*
+chown -R lnd /home/lnd/.lnd
 
 # Start lnd
 exec sudo -u lnd "$@"

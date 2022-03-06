@@ -2,7 +2,7 @@
 # with variables here.
 # These variables are also be used to access bitcoind for some services
 
-# Change RPC user and password to secure RPC access
+# Change RPC user and password to secure RPC access (For remote access)
 # RPCUSER=alice
 # RPCPASSWORD=some_password_here
 

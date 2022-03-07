@@ -18,6 +18,7 @@ x-jm-settings: &jm-settings
   JM_WALLET_PASSWORD: "password"            # [string] / Password for the wallet
   JM_YG_SCRIPT: "yield-generator-basic.py"  # [filename, 'yield-generator-basic.py' or 'yg-privacyenhanced.py'] / Script to use for market making 
   JM_NATIVE_SEGWIT: "true"
+  JM_BITCOIN_COOKIE_FILE: "/home/joinmarket/.bitcoin/.cookie"
 
 services:
   joinmarket-yg:
@@ -33,6 +34,7 @@ services:
       - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
       - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
       - ${_HOST_JOINMARKET:?}:${_GUEST_JOINMARKET:?}
+      - ${_HOST_BITCOIN:?}:/home/joinmarket/.bitcoin:ro
     command: yg-wrapper.sh
     tty: true
     env_file:

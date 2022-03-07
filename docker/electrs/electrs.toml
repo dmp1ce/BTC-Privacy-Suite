@@ -1,2 +1,2 @@
 network = "${NETWORK}"
-cookie = "${RPCUSER}:${RPCPASSWORD}"
+#cookie = "${RPCUSER}:${RPCPASSWORD}"

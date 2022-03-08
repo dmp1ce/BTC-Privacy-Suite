@@ -1,4 +1,4 @@
-FROM alexbosworth/balanceofsatoshis@sha256:199789f87b15eda106290f78cdfa3b43d2c020432c575f8fd6580d3b55609b8a
+FROM alexbosworth/balanceofsatoshis@sha256:c0266a3b1081871452e4a425fe1ecb36ef0c93236a59d2af0af7287e7e0623b8
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

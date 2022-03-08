@@ -14,6 +14,7 @@ services:
       - ${_HOST_TOR_DATA:?}:${_GUEST_TOR_DATA:?}:ro
       - ${_HOST_TOR_CONFIG:?}:${_GUEST_TOR_CONFIG:?}:ro
       - ${_HOST_JOINMARKET:?}:${_GUEST_JOINMARKET:?}
+      - ${_HOST_BITCOIN:?}:/home/joinmarket/.bitcoin:ro
     command: python3 obwatch/ob-watcher.py -H 0.0.0.0
     tty: true
     env_file:

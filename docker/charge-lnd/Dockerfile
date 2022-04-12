@@ -3,14 +3,14 @@ LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999
-ARG USERNAME=charge
 
 # hadolint ignore=DL3002
 USER root
 
 # Change the user and group ids to match builder's filesystem
 # Install sudo
-RUN usermod -u $LOCAL_USER_ID -g $LOCAL_GROUP_ID $USERNAME \
+RUN groupmod -g $LOCAL_GROUP_ID charge \
+    && usermod -u $LOCAL_USER_ID -g $LOCAL_GROUP_ID charge \
     && chown -R $LOCAL_USER_ID:$LOCAL_GROUP_ID /home/charge \
     && chown -R $LOCAL_USER_ID:$LOCAL_GROUP_ID /app \
     && apt-get update \

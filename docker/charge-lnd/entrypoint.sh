@@ -4,8 +4,8 @@ USERNAME=${USERNAME:=charge}
 GROUPNAME=${GROUPNAME:=charge}
 
 # Change local user id and group
-usermod -u "${LOCAL_USER_ID:?}" "$USERNAME"
 groupmod -g "${LOCAL_GROUP_ID:?}" "$GROUPNAME"
+usermod -u "${LOCAL_USER_ID:?}" -g "${LOCAL_GROUP_ID:?}" "$USERNAME"
 
 # Fix ownership
 find /home/charge\

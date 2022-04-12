@@ -1,14 +1,15 @@
+---
 version: '3.8'
 
 services:
+  dockerproxy:
+    environment:
+      CONTAINERS: 1
+      POST: 1
+      EXEC: 1
   ofelia:
-    image: mcuadros/ofelia:latest
     depends_on:
       - bos
-    command: daemon --docker
-    volumes:
-      - /var/run/docker.sock:/var/run/docker.sock:ro
-    
   bos:
     build:
       context: docker/bos
@@ -30,4 +31,5 @@ services:
     labels:
       ofelia.enabled: "true"
       ofelia.job-exec.bos-unlock.schedule: "@every 20m"
-      ofelia.job-exec.bos-unlock.command: "sudo -u node bos unlock .data/unlock_file"
+      ofelia.job-exec.bos-unlock.command:
+        "sudo -u node bos unlock .data/unlock_file"

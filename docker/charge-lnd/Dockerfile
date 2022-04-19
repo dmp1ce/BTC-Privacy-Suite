@@ -1,4 +1,5 @@
-FROM accumulator/charge-lnd:v0.2.10
+#FROM accumulator/charge-lnd:v0.2.10
+FROM dmp1ce/charge-lnd@sha256:de070183a3de82012ef272953092f17ee13d48726d92c16ad1562cc24bcadaa6
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

@@ -1,4 +1,5 @@
-FROM dmp1ce/joinmarket:0.9.5
+# version 0.9.6
+FROM dmp1ce/joinmarket@sha256:cf9ef2e77705fd974a9ca0820d97345dff7a6d9a2bdae0ce1a528bf60b64d6ec
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999

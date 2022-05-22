@@ -1,5 +1,5 @@
-#FROM accumulator/charge-lnd:v0.2.10
-FROM dmp1ce/charge-lnd@sha256:de070183a3de82012ef272953092f17ee13d48726d92c16ad1562cc24bcadaa6
+#FROM accumulator/charge-lnd:v0.2.10 with 'node-ratio-policies' patch
+FROM dmp1ce/charge-lnd@sha256:6f10f6398b1b493a57591c7bd052ba988a89958aeda63bd73a52d45887b6e6b0
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

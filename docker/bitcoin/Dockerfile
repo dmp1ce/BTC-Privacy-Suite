@@ -1,4 +1,4 @@
-FROM ruimarinho/bitcoin-core:22-alpine
+FROM ruimarinho/bitcoin-core:23-alpine
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

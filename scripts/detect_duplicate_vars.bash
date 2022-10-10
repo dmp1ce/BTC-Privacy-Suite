@@ -11,7 +11,7 @@ DIR=${DIR:-.}
 shopt -s nullglob
 for yml in "$DIR"/overrides/*.yml "$DIR"/docker-compose.yml; do
 
-    mapfile -t required_envs < <(grep -ho "env\/[a-zA-Z0-9_-]\+\.env" "$yml")
+    mapfile -t required_envs < <(grep -ho "env/[a-zA-Z0-9_-]\+\.env" "$yml")
 
     # Always add .env
     required_envs+=(".env")

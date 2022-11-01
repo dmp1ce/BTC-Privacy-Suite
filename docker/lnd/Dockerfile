@@ -1,5 +1,5 @@
-# version 0.15.2-alpine-beta
-FROM dmp1ce/lnd@sha256:4be35ecd473497f79b4ea25a03e8f7139c8bc5577dafb733f8da1deeba92322b
+# version 0.15.4-alpine-beta
+FROM dmp1ce/lnd@sha256:c9ba0e08225356b87016ff0413fccb5a4c551856950a9106081738ddf34eca08
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

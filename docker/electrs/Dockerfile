@@ -1,5 +1,5 @@
-# version 0.9.8
-FROM dmp1ce/electrs@sha256:56200fc3b78f68539bd440bcfc499048d26ecc6f46638ad6bb048c3f7c558cc2
+# version 0.9.10
+FROM dmp1ce/electrs@sha256:cc394eefe730870b6732abd0a321680af6c12a74e499fd065b25f42fbd169fd3
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

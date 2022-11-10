@@ -1,5 +1,5 @@
-#FROM accumulator/charge-lnd:v0.2.10 with 'node-ratio-policies' patch
-FROM dmp1ce/charge-lnd@sha256:6f10f6398b1b493a57591c7bd052ba988a89958aeda63bd73a52d45887b6e6b0
+# accumulator/charge-lnd:v0.2.12  https://hub.docker.com/layers/accumulator/charge-lnd/v0.2.12/images/sha256-a6437f5427f520490e8841de8a74ff95ac5191a51f19b100bba2a5c1e545889e?context=explore
+FROM accumulator/charge-lnd@sha256:a6437f5427f520490e8841de8a74ff95ac5191a51f19b100bba2a5c1e545889e
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

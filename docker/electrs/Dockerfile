@@ -1,5 +1,5 @@
-# version 0.9.10
-FROM dmp1ce/electrs@sha256:cc394eefe730870b6732abd0a321680af6c12a74e499fd065b25f42fbd169fd3
+# version 0.9.12 https://hub.docker.com/layers/dmp1ce/electrs/0.9.12/images/sha256-0c5c84e62c3d4ab867fa7d4f12ad9d7a7f39731bb99989c72fba518135ffa5bc?context=explore
+FROM dmp1ce/electrs@sha256:0c5c84e62c3d4ab867fa7d4f12ad9d7a7f39731bb99989c72fba518135ffa5bc
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

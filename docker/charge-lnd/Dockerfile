@@ -1,5 +1,5 @@
-# accumulator/charge-lnd:v0.2.12  https://hub.docker.com/layers/accumulator/charge-lnd/v0.2.12/images/sha256-a6437f5427f520490e8841de8a74ff95ac5191a51f19b100bba2a5c1e545889e?context=explore
-FROM accumulator/charge-lnd@sha256:a6437f5427f520490e8841de8a74ff95ac5191a51f19b100bba2a5c1e545889e
+# accumulator/charge-lnd:v0.2.13 https://hub.docker.com/layers/accumulator/charge-lnd/v0.2.13/images/sha256-4cb7fb09c0150b81e17e7b65ad997f2c90d299b5557253b1483d21b397f0e4c3?context=explore
+FROM accumulator/charge-lnd@sha256:4cb7fb09c0150b81e17e7b65ad997f2c90d299b5557253b1483d21b397f0e4c3
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

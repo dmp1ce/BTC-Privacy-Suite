@@ -1,5 +1,5 @@
-# version 0.15.4-alpine-beta
-FROM dmp1ce/lnd@sha256:c9ba0e08225356b87016ff0413fccb5a4c551856950a9106081738ddf34eca08
+# version 0.15.5-alpine-beta https://hub.docker.com/layers/dmp1ce/lnd/0.15-beta-alpine/images/sha256-42f9ee0135cc747d835dbbfc9e6b557bc39d11468937ed40df64739c24b623dc?context=explore
+FROM dmp1ce/lnd@sha256:42f9ee0135cc747d835dbbfc9e6b557bc39d11468937ed40df64739c24b623dc
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

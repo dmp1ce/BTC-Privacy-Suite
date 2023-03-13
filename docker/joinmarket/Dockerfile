@@ -1,5 +1,5 @@
-# version 0.9.7
-FROM dmp1ce/joinmarket@sha256:ebbaca855bfa544a13cabc23acf50c406cd22bed5a5ce1eccef83fa629d9fc22
+# version 0.9.9 https://hub.docker.com/layers/dmp1ce/joinmarket/0.9.9/images/sha256-5830cc47cc1edf9e3795a2bdc6af5e0861d5fb1090f0a29aba2c0a0b99f0954d?context=repo
+FROM dmp1ce/joinmarket@sha256:5830cc47cc1edf9e3795a2bdc6af5e0861d5fb1090f0a29aba2c0a0b99f0954d
 
 ARG LOCAL_USER_ID=9999
 ARG LOCAL_GROUP_ID=9999

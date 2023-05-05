@@ -1,5 +1,5 @@
-# version 0.15.5-alpine-beta https://hub.docker.com/layers/dmp1ce/lnd/0.15-beta-alpine/images/sha256-42f9ee0135cc747d835dbbfc9e6b557bc39d11468937ed40df64739c24b623dc?context=explore
-FROM dmp1ce/lnd@sha256:42f9ee0135cc747d835dbbfc9e6b557bc39d11468937ed40df64739c24b623dc
+# version 0.16.2-alpine-beta https://hub.docker.com/layers/dmp1ce/lnd/0.16.2-beta-alpine/images/sha256-3b42a905778b54789654d99aba90d7dded3f3e850093e2cd7d05dd2bbe5b3150?context=repo
+FROM dmp1ce/lnd@sha256:3b42a905778b54789654d99aba90d7dded3f3e850093e2cd7d05dd2bbe5b3150
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999

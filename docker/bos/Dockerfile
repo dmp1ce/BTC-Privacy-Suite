@@ -1,5 +1,5 @@
-# https://hub.docker.com/layers/alexbosworth/balanceofsatoshis/latest/images/sha256-923b3da952c8abcfddffd5490342cb89913eccab8e20c127a3deaaf260cb3be5?context=explore
-FROM alexbosworth/balanceofsatoshis@sha256:923b3da952c8abcfddffd5490342cb89913eccab8e20c127a3deaaf260cb3be5
+# https://hub.docker.com/layers/alexbosworth/balanceofsatoshis/15.8.11/images/sha256-90e67a1fe732b65e195aa67b8e925cac0a7ccf554a69be72936fefb6343678a5?context=explore
+FROM alexbosworth/balanceofsatoshis@sha256:90e67a1fe732b65e195aa67b8e925cac0a7ccf554a69be72936fefb6343678a5
 LABEL maintainer="David Parrish <daveparrish@tutanota.com>"
 
 ARG LOCAL_USER_ID=9999
